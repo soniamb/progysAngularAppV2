@@ -68,8 +68,22 @@ export const MENU_ITEMS: NbMenuItem[] = [
         title: 'Chat',
         link: '/pages/extra-components/chat',
       },
+        {
+            title: 'Actions',
+            link: '/pages/extra-components/Actions',
+        },
     ],
   },
+    {
+        title: 'Progys',
+        icon: 'nb-star',
+        children: [
+            {
+                title: 'Actions',
+                link: '/pages/Progys/Actions',
+            },
+        ],
+    },
   {
     title: 'Forms',
     icon: 'nb-compose',

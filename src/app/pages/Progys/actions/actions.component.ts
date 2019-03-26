@@ -2,8 +2,8 @@ import { Component } from '@angular/core';
 
 @Component({
   selector: 'ngx-alert',
-  templateUrl: 'alert.component.html',
+  templateUrl: 'actions.component.html',
 })
-export class AlertComponent {
+export class ActionsComponent {
 
 }

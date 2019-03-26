@@ -36,11 +36,13 @@ import { CalendarKitMonthCellComponent } from './calendar-kit/month-cell/month-c
 
 // service
 import { NewsService } from './services/news.service';
+import {ActionsComponent} from "./actions/actions.component";
 
 const COMPONENTS = [
   ExtraComponentsComponent,
   TreeComponent,
   AlertComponent,
+    ActionsComponent,
   ProgressBarComponent,
   InteractiveProgressBarComponent,
   SpinnerComponent,

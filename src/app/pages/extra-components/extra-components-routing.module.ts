@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-
 import { ExtraComponentsComponent } from './extra-components.component';
 import { TreeComponent } from './tree/tree.component';
 import { AlertComponent } from './alert/alert.component';
@@ -15,11 +14,16 @@ import { InfiniteListComponent } from './infinite-list/infinite-list.component';
 import { ListComponent } from './list/list.component';
 import { StepperComponent } from './stepper/stepper.component';
 import { CalendarKitFullCalendarShowcaseComponent } from './calendar-kit/calendar-kit.component';
+import {ActionsComponent} from "./actions/actions.component";
 
 const routes: Routes = [{
   path: '',
   component: ExtraComponentsComponent,
   children: [
+      {
+          path: 'Actions', 
+          component: ActionsComponent,
+      },
     {
       path: 'calendar',
       component: CalendarComponent,

@@ -1,46 +1,611 @@
+<br>
+<div class="btn-group" style="margin-left:78%">
+  <button  data-toggle="dropdown" class="btn btn-outline btn-primary"> Action <span class="caret"></span></button>
+  <ul class="dropdown-menu">
+    <li>
+      <button class="btn btn-outline btn-primary"  style="margin-left: 35px; margin-top: 5px" (click)="addAction()"> Ajouter </button>
+    </li>
+    <li>
+      <button [routerLink]="['../home']" class="btn btn-outline btn-primary"  style="margin-left: 35px; margin-top: 5px"> Fermer </button>
+    </li>
+    <li class="divider"></li>
+  </ul>
+</div>
 <div class="row">
-  <div class="col-md-12 col-lg-4 col-xxxl-4">
-    <nb-card>
-      <nb-card-header>Colored Alert</nb-card-header>
-      <nb-card-body>
-        <nb-alert status="success">You have been successfully authenticated!</nb-alert>
-        <nb-alert status="danger">You have been successfully authenticated!</nb-alert>
-        <nb-alert status="primary">You have been successfully authenticated!</nb-alert>
-        <nb-alert status="info">You have been successfully authenticated!</nb-alert>
-        <nb-alert status="warning">You have been successfully authenticated!</nb-alert>
-        <nb-alert status="active">You have been successfully authenticated!</nb-alert>
-        <nb-alert status="disabled">You have been successfully authenticated!</nb-alert>
-      </nb-card-body>
-    </nb-card>
+  <div class="col-lg-2">
+    <label > Code </label>
+  </div>
+  <div class="col-lg-3">
+    <input [(ngModel)]="action.code" class="form-control" type="text" >
+  </div>
+</div>
+<br>
+<div class="row">
+  <div class="input-group mb-3">
+    <div class="input-group-prepend" >
+      <div class="col-lg-2">
+        <label class="input-group-text" for="inputGroupSelect01"> Type </label>
+      </div>
+      <div class="col-lg-6" style="margin-left: 175px">
+        <select [(ngModel)]="action.type" class="custom-select" id="inputGroupSelect01" style="width: 230px ">
+          <option selected> </option>
+          <option value="AMELIORATION">AMELIORATION</option>
+          <option value="VERIFICATION">VERIFICATION</option>
+          <option value="AUTRE">AUTRE</option>
+        </select>
+      </div>
+    </div>
+  </div>
+</div>
+<br>
+<div class="row">
+  <div class="col-lg-2">
+    <label > Categorie </label>
+  </div>
+  <div class="col-lg-3">
+    <input [(ngModel)]="action.categorie" class="form-control" type="text">
   </div>
 
-  <div class="col-md-12 col-lg-4 col-xxxl-4">
-    <nb-card>
-      <nb-card-header>Outline Alert</nb-card-header>
-      <nb-card-body>
-        <nb-alert outline="success">You have been successfully authenticated!</nb-alert>
-        <nb-alert outline="danger">You have been successfully authenticated!</nb-alert>
-        <nb-alert outline="primary">You have been successfully authenticated!</nb-alert>
-        <nb-alert outline="info">You have been successfully authenticated!</nb-alert>
-        <nb-alert outline="warning">You have been successfully authenticated!</nb-alert>
-        <nb-alert outline="active">You have been successfully authenticated!</nb-alert>
-        <nb-alert outline="disabled">You have been successfully authenticated!</nb-alert>
-      </nb-card-body>
-    </nb-card>
+</div>
+<br>
+<div class="row">
+  <div class="col-lg-2">
+    <label > Priorite </label>
   </div>
+  <div class="col-lg-3">
+    <input [(ngModel)]="action.priorite" class="form-control" type="text">
+  </div>
+</div>
+<br>
+<div class="row">
+  <div class="input-group mb-3">
+    <div class="input-group-prepend" >
+      <div class="col-lg-2">
+        <label class="input-group-text" for="inputGroupSelect01"> Demandeur </label>
+      </div>
+      <div class="col-lg-3">
+        <select [(ngModel)]="action.demandeur" class="custom-select" id="inputGroupSelect02" style="margin-left: 95px; width: 230px ">
+          <option selected> </option>
+          <option value="Test 1">Test 1</option>
+          <option value="Test 2">Test 2</option>
+          <option value="Test 3">Test 3</option>
+        </select>
+      </div>
+    </div>
+  </div>
+</div>
+<br>
+<div class="row">
+  <div class="col-lg-2">
+    <label > Description Probleme </label>
+  </div>
+  <div class="col-lg-3">
+    <textarea [(ngModel)]="action.desc_prob" rows="3" style="width: 230px"></textarea>
+  </div>
+</div>
+<br>
+<div class="row">
+  <div class="col-lg-2">
+    <label > Code Origine </label>
+  </div>
+  <div class="col-lg-3">
+    <input [(ngModel)]="action.code_origine" class="form-control" type="text">
+  </div>
+</div>
+<br>
+<div class="row">
+  <div class="col-lg-2">
+    <label > Provient De </label>
+  </div>
+  <div class="col-lg-3">
+    <input [(ngModel)]="action.prov_de" class="form-control" type="text">
+  </div>
+</div>
+<br>
+<div class="row">
+  <div class="col-lg-2">
+    <label > Analyse des causes </label>
+  </div>
+  <div class="col-lg-3">
+    <textarea [(ngModel)]="action.analy_causes" rows="3" style="width: 230px"></textarea>
+  </div>
+</div>
+<br>
+<nav class="navbar navbar-light" style="background-color: #e3f2fd;">
+  <a class="navbar-brand"> Validation de l'action </a>
+</nav>
+<div class="row">
+  <div class="input-group mb-3">
+    <div class="input-group-prepend" >
+      <div class="col-lg-2">
+        <label class="input-group-text" for="inputGroupSelect01"> Valideur de l'action </label>
+      </div>
+      <div class="col-lg-3">
+        <select class="custom-select" id="inputGroupSelect03" style="margin-left: 89px; width: 230px ">
+          <option selected> </option>
+          <option value="1">user1</option>
+          <option value="2">user2</option>
+        </select>
+      </div>
+    </div>
+  </div>
+</div>
+<button type="button" class="btn btn-outline btn-primary" style="margin-left:77%">Valider</button>
+<br>
+<div class="row">
+  <div class="col-lg-2">
+    <label > Action validée? </label>
+  </div>
+  <div class="col-lg-3">
+    <div class="form-check">
+      <input class="form-check-input position-static" type="checkbox" id="blankCheckbox" value="option1" aria-label="...">
+    </div>
+  </div>
+</div>
+<!-- detail-action -->
+<nav class="navbar navbar-light" style="background-color: #e3f2fd;">
+  <a class="navbar-brand"> Détail Action.. </a>
+</nav>
+<div class="btn-group" style="margin-left:77%">
+  <button data-toggle="dropdown" class="btn btn-outline btn-primary"> Détail-Action <span class="caret"></span></button>
+  <ul class="dropdown-menu">
+    <li>
+      <button class="btn btn-outline btn-primary" data-toggle="modal" data-target="#exampleModalCenter" style="margin-left: 12px; margin-top: 5px">Ajouter</button>
+    </li>
+    <li>
+      <button class="btn btn-outline btn-primary"  data-toggle="modal" data-target="#exampleModalCenter" style="margin-left: 12px; margin-top: 5px"> Modifier </button>
+    </li>
+    <li>
+      <button class="btn btn-outline btn-primary"  style="margin-left: 12px; margin-top: 5px">Supprimer</button>
+    </li>
+    <li class="divider"></li>
+  </ul>
+</div>
+<div class="ibox-content" style="margin-bottom:15px; margin-top: 10px" >
+  <table class="table table-hover no-margins">
+    <thead>
+    <tr>
+      <th> Libelle Action </th>
+      <th> Type </th>
+      <th> Responsable </th>
+    </tr>
+    </thead>
+    <tbody>
+    </tbody>
+  </table>
+</div>
+<div class="row">
+  <div class="col-lg-2">
+    <label style="margin-left: 10px"> Taux de Réalisation </label>
+  </div>
+  <div class="col-lg-3">
+    <input class="form-control" type="number" min="0" max="100">
+  </div>
+</div>
+<div class="row">
+  <div class="col-lg-2">
+    <label style="margin-left: 10px"> Taux d'efficacité </label>
+  </div>
+  <div class="col-lg-3">
+    <input class="form-control" type="number" min="0" max="100">
+  </div>
+</div>
+<div class="row">
+  <div class="col-lg-2">
+    <label style="margin-left: 10px"> Observations </label>
+  </div>
+  <div class="col-lg-3">
+    <textarea rows="3" style="width: 230px"></textarea>
+  </div>
+</div>
 
-  <div class="col-md-12 col-lg-4 col-xxxl-4">
-    <nb-card>
-      <nb-card-header>Accent Alert</nb-card-header>
-      <nb-card-body>
-        <nb-alert status="success" accent="danger">You have been successfully authenticated!</nb-alert>
-        <nb-alert status="danger" accent="primary">You have been successfully authenticated!</nb-alert>
-        <nb-alert status="primary" accent="info">You have been successfully authenticated!</nb-alert>
-        <nb-alert status="info" accent="warning">You have been successfully authenticated!</nb-alert>
-        <nb-alert status="warning" accent="danger">You have been successfully authenticated!</nb-alert>
-        <nb-alert status="active" accent="disabled">You have been successfully authenticated!</nb-alert>
-        <nb-alert status="disabled" accent="success">You have been successfully authenticated!</nb-alert>
-      </nb-card-body>
-    </nb-card>
+<nav class="navbar navbar-light" style="background-color: #e3f2fd;">
+  <a class="navbar-brand"> Cloture de l'action.. </a>
+</nav>
+<div class="row">
+  <div class="input-group mb-3">
+    <div class="input-group-prepend" >
+      <div class="col-lg-2">
+        <label class="input-group-text" for="inputGroupSelect01"> Etat Action </label>
+      </div>
+      <div class="col-lg-3">
+        <select class="custom-select" id="inputGroupSelect04" style="margin-left: 98px; width: 230px ">
+          <option selected> </option>
+          <option value="1"> Ouverte </option>
+          <option value="2"> Cloturer </option>
+        </select>
+      </div>
+    </div>
+  </div>
+</div>
+<br>
+<div class="row">
+  <div class="col-lg-2">
+    <label > Date de Cloture </label>
+  </div>
+  <div class="col-lg-3">
+    <input class="form-control" type="date">
+  </div>
+</div>
+<br>
+<div class="row">
+  <div class="col-lg-2">
+    <label > Observation cloture </label>
+  </div>
+  <div class="col-lg-3">
+    <textarea rows="3" style="width: 230px"></textarea>
+  </div>
+</div>
+<br>
+<!--Document-joint -->
+<nav class="navbar navbar-light" style="background-color: #e3f2fd;">
+  <a class="navbar-brand"> Documents joints.. </a>
+</nav>
+<div class="btn-group" style="margin-left:78%">
+  <button  data-toggle="dropdown" class="btn btn-outline btn-primary"> Document <span class="caret"></span></button>
+  <ul class="dropdown-menu">
+    <li>
+      <button class="btn btn-outline btn-primary" data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo" style="margin-left: 12px; margin-top: 5px">Ajouter</button>
+    </li>
+    <li>
+      <button class="btn btn-outline btn-primary" data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo" style="margin-left: 12px; margin-top: 5px"> Modifier </button>
+    </li>
+    <li>
+      <button class="btn btn-outline btn-primary"  style="margin-left: 12px; margin-top: 5px">Supprimer</button>
+    </li>
+    <li class="divider"></li>
+  </ul>
+</div>
+<!-- Modal document-joint -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel"> Document joint</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="form-group">
+            <label for="document-name" class="col-form-label"> Nom Document</label>
+            <input type="text" class="form-control" id="document-name">
+          </div>
+          <div class="form-group">
+            <label for="objet-text" class="col-form-label">Objet</label>
+            <textarea class="form-control" id="objet-text"></textarea>
+          </div>
+          <div class="form-group">
+            <label for="date-creation" class="col-form-label"> Date de Création</label>
+            <input type="text" class="form-control" id="date-creation">
+          </div>
+          <div class="form-group">
+            <label for="observation-text" class="col-form-label">Observation</label>
+            <textarea class="form-control" id="observation-text"></textarea>
+          </div>
+          <div class="form-group">
+            <label  class="col-form-label">Fichier</label>
+            <div class="custom-file">
+              <input type="file" class="custom-file-input" id="customFile">
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal"> Fermer </button>
+        <button type="button" class="btn btn-primary"> Ajouter </button>
+      </div>
+    </div>
+  </div>
+</div>
+<br>
+<br>
+<div class="ibox-content" style="margin-bottom:50px" >
+  <table class="table table-hover no-margins">
+    <thead>
+    <tr>
+      <th> Nom Document </th>
+      <th> Type </th>
+    </tr>
+    </thead>
+    <tbody>
+    </tbody>
+  </table>
+</div>
+<!-- Modal detail-action -->
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle"> Détail Action ... </h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+
+      <div class="modal-body">
+
+        <!-- Accordion list-->
+        <div id="accordion" class="panel-group">
+          <div class="panel panel-default">
+            <div class="panel-heading">
+              <h4 class="panel-title">
+                <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne"> ACTION </a>
+              </h4>
+            </div>
+            <div id="collapseOne" class="panel-collapse collapse">
+              <div class="panel-body">
+
+                <!-- West list loula -->
+                <div class="row">
+                  <div class="col-lg-3">
+                    <label style="margin-left: 10px" > Numero </label>
+                  </div>
+                  <div class="col-lg-3">
+                    <input class="form-control" type="number">
+                  </div>
+                </div>
+                <div class="input-group mb-3">
+                  <div class="input-group-prepend" >
+                    <label class="input-group-text" for="inputGroupSelect01" style="margin-left: 10px"> Type </label>
+                    <select class="custom-select" id="inputGroupSelect05" style="margin-left: 57%; width: 230px ">
+                      <option selected> </option>
+                      <option value="1">AMELIORATION</option>
+                      <option value="2">AMELIORATION</option>
+                      <option value="3">AMELIORATION</option>
+                    </select>
+                  </div>
+                </div>
+                <br>
+                <div class="row">
+                  <div class="col-lg-3">
+                    <label style="margin-left: 10px" > Action </label>
+                  </div>
+                  <div class="col-lg-3">
+                    <textarea rows="3" style="width: 230px"></textarea>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-lg-3">
+                    <label style="margin-left: 10px" > Observation </label>
+                  </div>
+                  <div class="col-lg-3">
+                    <textarea rows="3" style="width: 230px"></textarea>
+                  </div>
+                </div>
+                <div class="input-group mb-3">
+                  <div class="input-group-prepend" >
+                    <label class="input-group-text" for="inputGroupSelect01" style="margin-left: 10px"> Resp. Réalisation </label>
+                    <select class="custom-select" id="inputGroupSelect06" style="margin-left: 35px; width: 230px ">
+                      <option selected> </option>
+                      <option value="1">user1</option>
+                      <option value="2">user2</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-lg-3">
+                    <label style="margin-left: 10px" > Date debut réelle </label>
+                  </div>
+                  <div class="col-lg-3">
+                    <input class="form-control" type="date">
+                  </div>
+                  <div class="col-lg-3">
+                    <label style="margin-left: 10px" > Date Prev Début</label>
+                  </div>
+                  <div class="col-lg-3">
+                    <input class="form-control" type="date">
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-lg-3">
+                    <label style="margin-left: 10px" > Date fin Réalisée</label>
+                  </div>
+                  <div class="col-lg-3">
+                    <input class="form-control" type="date">
+                  </div>
+                  <div class="col-lg-3">
+                    <label style="margin-left: 10px"> Date Prev Fin</label>
+                  </div>
+                  <div class="col-lg-3">
+                    <input class="form-control" type="date">
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-lg-3">
+                    <label style="margin-left: 10px" > Réalisation </label>
+                  </div>
+                  <div class="col-lg-3">
+                    <textarea rows="3" style="width: 230px"></textarea>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-lg-3">
+                    <label style="margin-left: 10px"> Observation Réalisation </label>
+                  </div>
+                  <div class="col-lg-3">
+                    <textarea rows="3" style="width: 230px"></textarea>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="panel panel-default">
+            <div class="panel-heading">
+              <h4 class="panel-title">
+                <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">Suivi Realisation</a>
+              </h4>
+            </div>
+            <div id="collapseTwo" class="panel-collapse collapse in">
+              <div class="panel-body">
+                <div class="row">
+                  <div class="col-lg-3">
+                    <label class="input-group-text" for="inputGroupSelect01" style="margin-left: 10px" > Resp. Suivi </label>
+                  </div>
+                  <div class="col-lg-3">
+                    <select class="custom-select" id="inputGroupSelect07" style="width: 100px">
+                      <option selected> </option>
+                      <option value="1">user1</option>
+                      <option value="2">user2</option>
+                    </select>
+                  </div>
+                  <div class="col-lg-3">
+                    <label style="margin-left: 10px"> Date de Suivi </label>
+                  </div>
+                  <div class="col-lg-3">
+                    <input class="form-control" type="date">
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-lg-3">
+                    <label style="margin-left: 10px"> Taux de Réalisation </label>
+                  </div>
+                  <div class="col-lg-3">
+                    <input class="form-control" type="number">
+                  </div>
+                  <div class="col-lg-3">
+                    <label class="input-group-text" for="inputGroupSelect01" style="margin-left: 10px" > Etat Action </label>
+                  </div>
+                  <div class="col-lg-3">
+                    <select class="custom-select" id="inputGroupSelect08" style="width: 100px">
+                      <option selected> </option>
+                      <option value="1"> Réalisée </option>
+                      <option value="2"> Non Réalisée </option>
+                    </select>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-lg-3">
+                    <label style="margin-left: 10px" > Observation Suivi </label>
+                  </div>
+                  <div class="col-lg-3">
+                    <textarea rows="3" style="width: 230px"></textarea>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="panel panel-default">
+            <div class="panel-heading">
+              <h4 class="panel-title">
+                <a data-toggle="collapse" data-parent="#accordion" href="#collapseThree">Suivi Efficacite </a>
+              </h4>
+            </div>
+            <div id="collapseThree" class="panel-collapse collapse">
+              <div class="panel-body">
+
+                <div class="row">
+                  <div class="col-lg-3">
+                    <label class="input-group-text" for="inputGroupSelect01" style="margin-left: 10px" > Resp. Mesure Eff </label>
+                  </div>
+                  <div class="col-lg-3">
+                    <select class="custom-select" id="inputGroupSelect09" style="width: 100px">
+                      <option selected> </option>
+                      <option value="1">user1</option>
+                      <option value="2">user2</option>
+                    </select>
+                  </div>
+                  <div class="col-lg-3">
+                    <label style="margin-left: 10px"> Date Mesure Eff </label>
+                  </div>
+                  <div class="col-lg-3">
+                    <input class="form-control" type="date">
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-lg-3">
+                    <label style="margin-left: 10px"> Taux d'efficacité </label>
+                  </div>
+                  <div class="col-lg-3">
+                    <input class="form-control" type="number">
+                  </div>
+                  <div class="col-lg-3">
+                    <label class="input-group-text" for="inputGroupSelect01" style="margin-left: 10px" > Etat Efficacite </label>
+                  </div>
+                  <div class="col-lg-3">
+                    <select class="custom-select" id="inputGroupSelect08" style="width: 100px">
+                      <option selected> </option>
+                      <option value="1"> Efficace </option>
+                      <option value="2"> Non Efficace </option>
+                    </select>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-lg-3">
+                    <label style="margin-left: 10px" > Obs. Efficacité </label>
+                  </div>
+                  <div class="col-lg-3">
+                    <textarea rows="3" style="width: 230px"></textarea>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="panel panel-default">
+            <div class="panel-heading">
+              <h4 class="panel-title">
+                <a data-toggle="collapse" data-parent="#accordion" href="#collapseFour"> Gestion des couts</a>
+              </h4>
+            </div>
+            <div id="collapseFour" class="panel-collapse collapse">
+              <div class="panel-body">
+                <div class="row">
+                  <div class="col-lg-3">
+                    <label style="margin-left: 10px" > Cout MO Prévisionnel </label>
+                  </div>
+                  <div class="col-lg-3">
+                    <input class="form-control" type="number">
+                  </div>
+                  <div class="col-lg-3">
+                    <label style="margin-left: 10px" > Cout MO Réel</label>
+                  </div>
+                  <div class="col-lg-3">
+                    <input class="form-control" type="number">
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-lg-3">
+                    <label style="margin-left: 10px" > Cout Materiel Prévisionnel </label>
+                  </div>
+                  <div class="col-lg-3">
+                    <input class="form-control" type="number">
+                  </div>
+                  <div class="col-lg-3">
+                    <label style="margin-left: 10px" > Cout Materiel Réel</label>
+                  </div>
+                  <div class="col-lg-3">
+                    <input class="form-control" type="number">
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-lg-3">
+                    <label style="margin-left: 10px" > Total MO Prévisionnel </label>
+                  </div>
+                  <div class="col-lg-3">
+                    <input class="form-control" type="number">
+                  </div>
+                  <div class="col-lg-3">
+                    <label style="margin-left: 10px" > Total MO Réel</label>
+                  </div>
+                  <div class="col-lg-3">
+                    <input class="form-control" type="number">
+                  </div>
+                </div>
+
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- fin accordion-->
+
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save </button>
+      </div>
+
+    </div>
   </div>
 </div>
