@@ -7,17 +7,12 @@
           <button type="button"  class="btn btn-outline-primary" ngbDropdownToggle> Action
           </button>
           <ul class="dropdown-menu" ngbDropdownMenu>
-            <li class="dropdown-item">
-              <button class="btn btn-outline btn-primary" style="margin-left: 35px; margin-top: 5px"
-                      (click)="addAction()"> Ajouter
-              </button>
-            </li>
+            <li class="dropdown-item" (click)="addAction()"> Ajouter</li>
             <li class="dropdown-item" >
               <!--<button [routerLink]="['../home']" class="btn btn-outline btn-primary"
                       style="margin-left: 35px; margin-top: 5px"> Fermer
               </button>-->
             </li>
-            <li class="divider"></li>
           </ul>
         </div>
         <div class="row">
@@ -174,20 +169,14 @@
             <button type="button"  class="btn btn-outline-primary" ngbDropdownToggle> Détail Action
             </button>
             <ul class="dropdown-menu" ngbDropdownMenu>
-              <li class="dropdown-item">
-              <button class="btn btn-outline btn-primary" data-toggle="modal" data-target="#exampleModalCenter"
-                      style="margin-left: 12px; margin-top: 5px">Ajouter
-              </button>
+              <li class="dropdown-item" data-toggle="modal" data-target="#exampleModalCenter"  >
+              Ajouter
+            </li>
+            <li class="dropdown-item" data-toggle="modal" data-target="#exampleModalCenter">
+              Modifier
             </li>
             <li class="dropdown-item">
-              <button class="btn btn-outline btn-primary" data-toggle="modal" data-target="#exampleModalCenter"
-                      style="margin-left: 12px; margin-top: 5px"> Modifier
-              </button>
-            </li>
-            <li class="dropdown-item">
-              <button class="btn btn-outline btn-primary" style="margin-left: 12px; margin-top: 5px">Supprimer</button>
-            </li>
-            <li class="divider"></li>
+              Supprimer
           </ul>
         </div>
         <div class="ibox-content" style="margin-bottom:15px; margin-top: 10px">
@@ -289,7 +278,7 @@
 <!--Document-joint -->
 <div class="row">
  <div class="col-md-12">
-  <nb-card class="inline-form-card"> Y
+  <nb-card class="inline-form-card">
     <nb-card-header> Document joint </nb-card-header>
     <nb-card-body>
       <div class="dropdown ghost-dropdown" style="margin-left:78%" ngbDropdown>
