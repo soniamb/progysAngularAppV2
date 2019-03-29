@@ -1,7 +1,7 @@
 import { NbMenuItem } from '@nebular/theme';
 
 export const MENU_ITEMS: NbMenuItem[] = [
-  {
+  /*{
     title: 'E-commerce',
     icon: 'nb-e-commerce',
     link: '/pages/dashboard',
@@ -73,7 +73,7 @@ export const MENU_ITEMS: NbMenuItem[] = [
             link: '/pages/extra-components/Actions',
         },
     ],
-  },
+  },*/
     {
         title: 'Progys',
         icon: 'nb-star',
@@ -84,7 +84,7 @@ export const MENU_ITEMS: NbMenuItem[] = [
             },
         ],
     },
-  {
+  /*{
     title: 'Forms',
     icon: 'nb-compose',
     children: [
@@ -268,5 +268,5 @@ export const MENU_ITEMS: NbMenuItem[] = [
         link: '/auth/reset-password',
       },
     ],
-  },
+  },*/
 ];
