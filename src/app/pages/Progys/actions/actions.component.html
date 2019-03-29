@@ -1,670 +1,719 @@
-<div class="row">
-  <div class="col-md-12">
-    <nb-card class="inline-form-card">
-      <nb-card-header> Action</nb-card-header>
-      <nb-card-body>
-        <div class="dropdown ghost-dropdown" style="margin-left:78%" ngbDropdown>
-          <button type="button"  class="btn btn-outline-primary" ngbDropdownToggle> Action
-          </button>
-          <ul class="dropdown-menu" ngbDropdownMenu>
-            <li class="dropdown-item" (click)="addAction()"> Ajouter</li>
-            <li class="dropdown-item" >
-              <!--<button [routerLink]="['../home']" class="btn btn-outline btn-primary"
-                      style="margin-left: 35px; margin-top: 5px"> Fermer
-              </button>-->
-            </li>
-          </ul>
-        </div>
-        <div class="row">
-          <div class="col-lg-2">
-            <label> Code </label>
-          </div>
-          <div class="col-lg-3">
-            <input [(ngModel)]="action.code" class="form-control" type="text">
-          </div>
-        </div>
-        <br>
-        <div class="row">
-          <div class="col-lg-2">
-            <label> Type </label>
-          </div>
-          <div class="col-lg-3">
-            <div class="form-group">
-              <select [(ngModel)]="action.type" class="form-control">
-                <option selected></option>
-                <option value="AMELIORATION">AMELIORATION</option>
-                <option value="VERIFICATION">VERIFICATION</option>
-                <option value="AUTRE">AUTRE</option>
-              </select>
-            </div>
-          </div>
-        </div>
-        <br>
-        <div class="row">
-          <div class="col-lg-2">
-            <label> Categorie </label>
-          </div>
-          <div class="col-lg-3">
-            <input [(ngModel)]="action.categorie" class="form-control" type="text">
-          </div>
+<ngx-spinner
+        bdColor="rgba(51,51,51,0.8)"
+        size="medium"
+        color="#fff"
+        type="ball-scale-multiple">
+    <p style="font-size: 20px; color: white">Loading...</p>
+</ngx-spinner>
 
+
+<!--Liste des actions-->
+<div *ngIf="add_action == false">
+
+    <div class="row">
+        <div class="col-md-12">
+            <nb-card class="inline-form-card">
+                <nb-card-header> List des actions</nb-card-header>
+                <nb-card-body>
+                    <div class="dropdown ghost-dropdown" style="margin-left:78%" ngbDropdown>
+                        <button type="button" class="btn btn-outline-primary" ngbDropdownToggle> Actions
+                        </button>
+                        <ul class="dropdown-menu" ngbDropdownMenu>
+                            <li class="dropdown-item" (click)="showHideAddAction()"> Ajouter</li>
+                        </ul>
+                    </div>
+                    <div class="ibox-content" style="margin-bottom:15px; margin-top: 10px">
+                        <table class="table table-hover no-margins">
+                            <thead>
+                            <tr>
+                                <th>Id</th>
+                                <th>Code origine</th>
+                                <th>Categorie</th>
+                                <th>Date de creation</th>
+                                <th>Description probléme</th>
+                                <th>Type</th>
+                                <th>Priorité</th>
+                                <th>Provient de</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr *ngFor="let action of actions">
+                                <td>
+                                    <small></small>
+                                    {{action.id}}
+                                </td>
+                                <td>{{action.code_origine}}</td>
+                                <td>{{action.categorie}}</td>
+                                <td>{{action.date_creation | date:'dd MMM yyyy HH:mm:ss'}}</td>
+                                <td>{{action.desc_prob}}</td>
+                                <td>{{action.type}}</td>
+                                <td>{{action.priorite}}</td>
+                                <td>{{action.prov_de}}</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </nb-card-body>
+            </nb-card>
         </div>
-        <br>
-        <div class="row">
-          <div class="col-lg-2">
-            <label> Priorite </label>
-          </div>
-          <div class="col-lg-3">
-            <input [(ngModel)]="action.priorite" class="form-control" type="text">
-          </div>
-        </div>
-        <br>
-        <div class="row">
-          <div class="col-lg-2">
-            <label> Demandeur </label>
-          </div>
-          <div class="col-lg-3">
-            <div class="form-group">
-              <select [(ngModel)]="action.demandeur" class="form-control">
-                <option selected></option>
-                <option value="Test 1">Test 1</option>
-                <option value="Test 2">Test 2</option>
-                <option value="Test 3">Test 3</option>
-              </select>
-            </div>
-          </div>
-        </div>
-        <br>
-        <div class="row">
-          <div class="col-lg-2">
-            <label> Description Probleme </label>
-          </div>
-          <div class="col-lg-3">
-            <div class="input-group">
+    </div>
+
+</div>
+
+
+<!--Add Action-->
+<div *ngIf="add_action == true">
+    <div class="row">
+        <div class="col-md-12">
+            <nb-card class="inline-form-card">
+                <nb-card-header>
+                    <div class="row">
+                        <div class="col-9">
+                            Action
+                        </div>
+                        <div class="col-2">
+                            <div class="dropdown ghost-dropdown" ngbDropdown>
+                                <button type="button" class="btn btn-outline-primary" ngbDropdownToggle> actions
+                                </button>
+                                <ul class="dropdown-menu" ngbDropdownMenu>
+                                    <li class="dropdown-item" (click)="showHideAddAction()">Retour</li>
+                                    <li class="dropdown-item" (click)="addAction()">Enregistrer</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </nb-card-header>
+                <nb-card-body>
+                    <div class="row">
+                        <div class="col-lg-2">
+                            <label> Code </label>
+                        </div>
+                        <div class="col-lg-3">
+                            <input [(ngModel)]="action.code" class="form-control" type="text">
+                        </div>
+                    </div>
+                    <br>
+                    <div class="row">
+                        <div class="col-lg-2">
+                            <label> Type </label>
+                        </div>
+                        <div class="col-lg-3">
+                            <div class="form-group">
+                                <select [(ngModel)]="action.type" class="form-control">
+                                    <option selected></option>
+                                    <option value="AMELIORATION">AMELIORATION</option>
+                                    <option value="VERIFICATION">VERIFICATION</option>
+                                    <option value="AUTRE">AUTRE</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <br>
+                    <div class="row">
+                        <div class="col-lg-2">
+                            <label> Categorie </label>
+                        </div>
+                        <div class="col-lg-3">
+                            <input [(ngModel)]="action.categorie" class="form-control" type="text">
+                        </div>
+
+                    </div>
+                    <br>
+                    <div class="row">
+                        <div class="col-lg-2">
+                            <label> Priorite </label>
+                        </div>
+                        <div class="col-lg-3">
+                            <input [(ngModel)]="action.priorite" class="form-control" type="text">
+                        </div>
+                    </div>
+                    <br>
+                    <div class="row">
+                        <div class="col-lg-2">
+                            <label> Demandeur </label>
+                        </div>
+                        <div class="col-lg-3">
+                            <div class="form-group">
+                                <select [(ngModel)]="action.demandeur" class="form-control">
+                                    <option selected></option>
+                                    <option value="Test 1">Test 1</option>
+                                    <option value="Test 2">Test 2</option>
+                                    <option value="Test 3">Test 3</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <br>
+                    <div class="row">
+                        <div class="col-lg-2">
+                            <label> Description Probleme </label>
+                        </div>
+                        <div class="col-lg-3">
+                            <div class="input-group">
               <textarea [(ngModel)]="action.desc_probleme" rows="5" placeholder="Text Area"
                         class="form-control"></textarea>
-            </div>
-          </div>
-        </div>
-        <br>
-        <div class="row">
-          <div class="col-lg-2">
-            <label> Code Origine </label>
-          </div>
-          <div class="col-lg-3">
-            <input [(ngModel)]="action.code_origine" class="form-control" type="text">
-          </div>
-        </div>
-        <br>
-        <div class="row">
-          <div class="col-lg-2">
-            <label> Provient De </label>
-          </div>
-          <div class="col-lg-3">
-            <input [(ngModel)]="action.prov_de" class="form-control" type="text">
-          </div>
-        </div>
-        <br>
-        <div class="row">
-          <div class="col-lg-2">
-            <label> Analyse des causes </label>
-          </div>
-          <div class="col-lg-3">
-            <div class="input-group">
+                            </div>
+                        </div>
+                    </div>
+                    <br>
+                    <div class="row">
+                        <div class="col-lg-2">
+                            <label> Code Origine </label>
+                        </div>
+                        <div class="col-lg-3">
+                            <input [(ngModel)]="action.code_origine" class="form-control" type="text">
+                        </div>
+                    </div>
+                    <br>
+                    <div class="row">
+                        <div class="col-lg-2">
+                            <label> Provient De </label>
+                        </div>
+                        <div class="col-lg-3">
+                            <input [(ngModel)]="action.prov_de" class="form-control" type="text">
+                        </div>
+                    </div>
+                    <br>
+                    <div class="row">
+                        <div class="col-lg-2">
+                            <label> Analyse des causes </label>
+                        </div>
+                        <div class="col-lg-3">
+                            <div class="input-group">
               <textarea [(ngModel)]="action.analy_causes" rows="5" placeholder="Text Area"
                         class="form-control"></textarea>
-            </div>
-          </div>
+                            </div>
+                        </div>
+                    </div>
+                </nb-card-body>
+            </nb-card>
         </div>
-      </nb-card-body>
-    </nb-card>
-  </div>
-</div>
-<br>
-<!-- validation action -->
-<div class="row">
-  <div class="col-md-12">
-    <nb-card class="inline-form-card">
-      <nb-card-header> Validation de l'action</nb-card-header>
-      <nb-card-body>
-        <form class="form-group">
-          <div class="form-group row">
-            <div class="col-lg-2">
-              <label> Valideur de l'action </label>
-            </div>
-            <div class="col-lg-3">
-              <select class="form-control">
-                <option selected></option>
-                <option value="1">user1</option>
-                <option value="2">user2</option>
-              </select>
-            </div>
-          </div>
-          <button type="button"  class="btn btn-outline-primary" style="margin-left:78%">Valider</button>
-          <br>
-          <div class="form-group row">
-            <div class="col-lg-2">
-              <label class="col-sm-3 col-form-label"> Action validée? </label>
-            </div>
-            <div class="col-lg-3">
-              <div class="form-check">
-                <input class="form-check-input position-static" type="checkbox" id="blankCheckbox" value="option1"
-                       aria-label="...">
-              </div>
-            </div>
-          </div>
-        </form>
-      </nb-card-body>
-    </nb-card>
-  </div>
-</div>
-
-<!-- detail-action -->
-<div class="row">
-  <div class="col-md-12">
-    <nb-card class="inline-form-card">
-      <nb-card-header> Détail Action</nb-card-header>
-      <nb-card-body>
-          <div class="dropdown ghost-dropdown" style="margin-left:78%" ngbDropdown>
-            <button type="button"  class="btn btn-outline-primary" ngbDropdownToggle> Détail Action
-            </button>
-            <ul class="dropdown-menu" ngbDropdownMenu>
-              <li class="dropdown-item" data-toggle="modal" data-target="#exampleModalCenter"  >
-              Ajouter
-            </li>
-            <li class="dropdown-item" data-toggle="modal" data-target="#exampleModalCenter">
-              Modifier
-            </li>
-            <li class="dropdown-item">
-              Supprimer
-          </ul>
-        </div>
-        <div class="ibox-content" style="margin-bottom:15px; margin-top: 10px">
-          <table class="table table-hover no-margins">
-            <thead>
-            <tr>
-              <th> Libelle Action</th>
-              <th> Type</th>
-              <th> Responsable</th>
-            </tr>
-            </thead>
-            <tbody>
-            </tbody>
-          </table>
-        </div>
-      </nb-card-body>
-    </nb-card>
-  </div>
-</div>
-<div class="row">
-  <div class="col-md-12">
-    <nb-card class="inline-form-card">
-      <nb-card-header> Taux Action</nb-card-header>
-      <nb-card-body>
-        <div class="row">
-          <div class="col-lg-2">
-            <label style="margin-left: 10px"> Taux de Réalisation </label>
-          </div>
-          <div class="col-lg-3">
-            <input class="form-control" type="number" min="0" max="100">
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-lg-2">
-            <label style="margin-left: 10px"> Taux d'efficacité </label>
-          </div>
-          <div class="col-lg-3">
-            <input class="form-control" type="number" min="0" max="100">
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-lg-2">
-            <label style="margin-left: 10px"> Observations </label>
-          </div>
-          <div class="col-lg-3">
-            <div class="input-group">
-              <textarea rows="5" placeholder="Text Area" class="form-control"></textarea>
-            </div>
-          </div>
-        </div>
-      </nb-card-body>
-    </nb-card>
-  </div>
-</div>
-<div class="row">
-  <div class="col-md-12">
-    <nb-card class="inline-form-card">
-      <nb-card-header> Cloture de l'action</nb-card-header>
-      <nb-card-body>
-        <div class="row">
-          <div class="col-lg-2">
-            <label> Etat Action </label>
-          </div>
-          <div class="col-lg-3">
-            <div class="form-group">
-              <select class="form-control">
-                <option selected></option>
-                <option value="1"> Ouverte</option>
-                <option value="2"> Cloturer</option>
-              </select>
-            </div>
-          </div>
-        </div>
-        <br>
-        <div class="row">
-          <div class="col-lg-2">
-            <label> Date de Cloture </label>
-          </div>
-          <div class="col-lg-3">
-            <input class="form-control" type="date">
-          </div>
-        </div>
-        <br>
-        <div class="row">
-          <div class="col-lg-2">
-            <label> Observation cloture </label>
-          </div>
-          <div class="col-lg-3">
-            <div class="input-group">
-              <textarea rows="5" placeholder="Text Area" class="form-control"></textarea>
-            </div>
-          </div>
-        </div>
-      </nb-card-body>
-    </nb-card>
-  </div>
-</div>
-<br>
-<!--Document-joint -->
-<div class="row">
- <div class="col-md-12">
-  <nb-card class="inline-form-card">
-    <nb-card-header> Document joint </nb-card-header>
-    <nb-card-body>
-      <div class="dropdown ghost-dropdown" style="margin-left:78%" ngbDropdown>
-        <button type="button"  class="btn btn-outline-primary" ngbDropdownToggle> Document joint
-        </button>
-        <ul class="dropdown-menu" ngbDropdownMenu>
-          <li class="dropdown-item">
-            <button class="btn btn-outline btn-primary" data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo"
-                    style="margin-left: 12px; margin-top: 5px">Ajouter
-            </button>
-          </li>
-          <li class="dropdown-item">
-            <button class="btn btn-outline btn-primary" data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo"
-                    style="margin-left: 12px; margin-top: 5px"> Modifier
-            </button>
-          </li>
-          <li class="dropdown-item">
-            <button class="btn btn-outline btn-primary" style="margin-left: 12px; margin-top: 5px">Supprimer</button>
-          </li>
-          <li class="divider"></li>
-        </ul>
-      </div>
-      <br>
-      <div class="ibox-content" style="margin-bottom:50px">
-        <table class="table table-hover no-margins">
-          <thead>
-          <tr>
-            <th> Nom Document</th>
-            <th> Type</th>
-          </tr>
-          </thead>
-          <tbody>
-          </tbody>
-        </table>
-      </div>
-    </nb-card-body>
-  </nb-card>
- </div>
-</div>
-<div class="row">
-<!-- Modal document-joint -->
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-     aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel"> Document joint</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <form>
-          <div class="form-group">
-            <label for="document-name" class="col-form-label"> Nom Document</label>
-            <input type="text" class="form-control" id="document-name">
-          </div>
-          <div class="form-group">
-            <label for="objet-text" class="col-form-label">Objet</label>
-            <textarea class="form-control" id="objet-text"></textarea>
-          </div>
-          <div class="form-group">
-            <label for="date-creation" class="col-form-label"> Date de Création</label>
-            <input type="text" class="form-control" id="date-creation">
-          </div>
-          <div class="form-group">
-            <label for="observation-text" class="col-form-label">Observation</label>
-            <textarea class="form-control" id="observation-text"></textarea>
-          </div>
-          <div class="form-group">
-            <label class="col-form-label">Fichier</label>
-            <div class="custom-file">
-              <input type="file" class="custom-file-input" id="customFile">
-            </div>
-          </div>
-        </form>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal"> Fermer</button>
-        <button type="button" class="btn btn-primary"> Ajouter</button>
-      </div>
     </div>
-  </div>
-</div>
-<br>
-<br>
-
-<!-- Modal detail-action -->
-<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
-     aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLongTitle"> Détail Action ... </h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-
-      <div class="modal-body">
-
-        <!-- Accordion list-->
-        <div id="accordion" class="panel-group">
-          <div class="panel panel-default">
-            <div class="panel-heading">
-              <h4 class="panel-title">
-                <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne"> ACTION </a>
-              </h4>
-            </div>
-            <div id="collapseOne" class="panel-collapse collapse">
-              <div class="panel-body">
-
-                <!-- West list loula -->
-                <div class="row">
-                  <div class="col-lg-3">
-                    <label style="margin-left: 10px"> Numero </label>
-                  </div>
-                  <div class="col-lg-3">
-                    <input class="form-control" type="number">
-                  </div>
-                </div>
-                <div class="input-group mb-3">
-                  <div class="input-group-prepend">
-                    <label> Type </label>
-                    <select class="custom-select" id="inputGroupSelect05" style="margin-left: 57%; width: 230px ">
-                      <option selected></option>
-                      <option value="1">AMELIORATION</option>
-                      <option value="2">AMELIORATION</option>
-                      <option value="3">AMELIORATION</option>
-                    </select>
-                  </div>
-                </div>
-                <br>
-                <div class="row">
-                  <div class="col-lg-3">
-                    <label style="margin-left: 10px"> Action </label>
-                  </div>
-                  <div class="col-lg-3">
-                    <textarea rows="3" style="width: 230px"></textarea>
-                  </div>
-                </div>
-                <div class="row">
-                  <div class="col-lg-3">
-                    <label style="margin-left: 10px"> Observation </label>
-                  </div>
-                  <div class="col-lg-3">
-                    <textarea rows="3" style="width: 230px"></textarea>
-                  </div>
-                </div>
-                <div class="input-group mb-3">
-                  <div class="input-group-prepend">
-                    <label class="input-group-text" for="inputGroupSelect01" style="margin-left: 10px"> Resp.
-                      Réalisation </label>
-                    <select class="custom-select" id="inputGroupSelect06" style="margin-left: 35px; width: 230px ">
-                      <option selected></option>
-                      <option value="1">user1</option>
-                      <option value="2">user2</option>
-                    </select>
-                  </div>
-                </div>
-                <div class="row">
-                  <div class="col-lg-3">
-                    <label style="margin-left: 10px"> Date debut réelle </label>
-                  </div>
-                  <div class="col-lg-3">
-                    <input class="form-control" type="date">
-                  </div>
-                  <div class="col-lg-3">
-                    <label style="margin-left: 10px"> Date Prev Début</label>
-                  </div>
-                  <div class="col-lg-3">
-                    <input class="form-control" type="date">
-                  </div>
-                </div>
-                <div class="row">
-                  <div class="col-lg-3">
-                    <label style="margin-left: 10px"> Date fin Réalisée</label>
-                  </div>
-                  <div class="col-lg-3">
-                    <input class="form-control" type="date">
-                  </div>
-                  <div class="col-lg-3">
-                    <label style="margin-left: 10px"> Date Prev Fin</label>
-                  </div>
-                  <div class="col-lg-3">
-                    <input class="form-control" type="date">
-                  </div>
-                </div>
-                <div class="row">
-                  <div class="col-lg-3">
-                    <label style="margin-left: 10px"> Réalisation </label>
-                  </div>
-                  <div class="col-lg-3">
-                    <textarea rows="3" style="width: 230px"></textarea>
-                  </div>
-                </div>
-                <div class="row">
-                  <div class="col-lg-3">
-                    <label style="margin-left: 10px"> Observation Réalisation </label>
-                  </div>
-                  <div class="col-lg-3">
-                    <textarea rows="3" style="width: 230px"></textarea>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="panel panel-default">
-            <div class="panel-heading">
-              <h4 class="panel-title">
-                <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">Suivi Realisation</a>
-              </h4>
-            </div>
-            <div id="collapseTwo" class="panel-collapse collapse in">
-              <div class="panel-body">
-                <div class="row">
-                  <div class="col-lg-3">
-                    <label class="input-group-text" for="inputGroupSelect01" style="margin-left: 10px"> Resp.
-                      Suivi </label>
-                  </div>
-                  <div class="col-lg-3">
-                    <select class="custom-select" id="inputGroupSelect07" style="width: 100px">
-                      <option selected></option>
-                      <option value="1">user1</option>
-                      <option value="2">user2</option>
-                    </select>
-                  </div>
-                  <div class="col-lg-3">
-                    <label style="margin-left: 10px"> Date de Suivi </label>
-                  </div>
-                  <div class="col-lg-3">
-                    <input class="form-control" type="date">
-                  </div>
-                </div>
-                <div class="row">
-                  <div class="col-lg-3">
-                    <label style="margin-left: 10px"> Taux de Réalisation </label>
-                  </div>
-                  <div class="col-lg-3">
-                    <input class="form-control" type="number">
-                  </div>
-                  <div class="col-lg-3">
-                    <label class="input-group-text" for="inputGroupSelect01" style="margin-left: 10px"> Etat
-                      Action </label>
-                  </div>
-                  <div class="col-lg-3">
-                    <select class="custom-select" id="inputGroupSelect08" style="width: 100px">
-                      <option selected></option>
-                      <option value="1"> Réalisée</option>
-                      <option value="2"> Non Réalisée</option>
-                    </select>
-                  </div>
-                </div>
-                <div class="row">
-                  <div class="col-lg-3">
-                    <label style="margin-left: 10px"> Observation Suivi </label>
-                  </div>
-                  <div class="col-lg-3">
-                    <textarea rows="3" style="width: 230px"></textarea>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="panel panel-default">
-            <div class="panel-heading">
-              <h4 class="panel-title">
-                <a data-toggle="collapse" data-parent="#accordion" href="#collapseThree">Suivi Efficacite </a>
-              </h4>
-            </div>
-            <div id="collapseThree" class="panel-collapse collapse">
-              <div class="panel-body">
-
-                <div class="row">
-                  <div class="col-lg-3">
-                    <label class="input-group-text" for="inputGroupSelect01" style="margin-left: 10px"> Resp. Mesure
-                      Eff </label>
-                  </div>
-                  <div class="col-lg-3">
-                    <select class="custom-select" id="inputGroupSelect09" style="width: 100px">
-                      <option selected></option>
-                      <option value="1">user1</option>
-                      <option value="2">user2</option>
-                    </select>
-                  </div>
-                  <div class="col-lg-3">
-                    <label style="margin-left: 10px"> Date Mesure Eff </label>
-                  </div>
-                  <div class="col-lg-3">
-                    <input class="form-control" type="date">
-                  </div>
-                </div>
-                <div class="row">
-                  <div class="col-lg-3">
-                    <label style="margin-left: 10px"> Taux d'efficacité </label>
-                  </div>
-                  <div class="col-lg-3">
-                    <input class="form-control" type="number">
-                  </div>
-                  <div class="col-lg-3">
-                    <label class="input-group-text" for="inputGroupSelect01" style="margin-left: 10px"> Etat
-                      Efficacite </label>
-                  </div>
-                  <div class="col-lg-3">
-                    <select class="custom-select" id="inputGroupSelect08" style="width: 100px">
-                      <option selected></option>
-                      <option value="1"> Efficace</option>
-                      <option value="2"> Non Efficace</option>
-                    </select>
-                  </div>
-                </div>
-                <div class="row">
-                  <div class="col-lg-3">
-                    <label style="margin-left: 10px"> Obs. Efficacité </label>
-                  </div>
-                  <div class="col-lg-3">
-                    <textarea rows="3" style="width: 230px"></textarea>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="panel panel-default">
-            <div class="panel-heading">
-              <h4 class="panel-title">
-                <a data-toggle="collapse" data-parent="#accordion" href="#collapseFour"> Gestion des couts</a>
-              </h4>
-            </div>
-            <div id="collapseFour" class="panel-collapse collapse">
-              <div class="panel-body">
-                <div class="row">
-                  <div class="col-lg-3">
-                    <label style="margin-left: 10px"> Cout MO Prévisionnel </label>
-                  </div>
-                  <div class="col-lg-3">
-                    <input class="form-control" type="number">
-                  </div>
-                  <div class="col-lg-3">
-                    <label style="margin-left: 10px"> Cout MO Réel</label>
-                  </div>
-                  <div class="col-lg-3">
-                    <input class="form-control" type="number">
-                  </div>
-                </div>
-                <div class="row">
-                  <div class="col-lg-3">
-                    <label style="margin-left: 10px"> Cout Materiel Prévisionnel </label>
-                  </div>
-                  <div class="col-lg-3">
-                    <input class="form-control" type="number">
-                  </div>
-                  <div class="col-lg-3">
-                    <label style="margin-left: 10px"> Cout Materiel Réel</label>
-                  </div>
-                  <div class="col-lg-3">
-                    <input class="form-control" type="number">
-                  </div>
-                </div>
-                <div class="row">
-                  <div class="col-lg-3">
-                    <label style="margin-left: 10px"> Total MO Prévisionnel </label>
-                  </div>
-                  <div class="col-lg-3">
-                    <input class="form-control" type="number">
-                  </div>
-                  <div class="col-lg-3">
-                    <label style="margin-left: 10px"> Total MO Réel</label>
-                  </div>
-                  <div class="col-lg-3">
-                    <input class="form-control" type="number">
-                  </div>
-                </div>
-
-              </div>
-            </div>
-          </div>
+    <br>
+    <!-- validation action -->
+    <div class="row">
+        <div class="col-md-12">
+            <nb-card class="inline-form-card">
+                <nb-card-header> Validation de l'action</nb-card-header>
+                <nb-card-body>
+                    <form class="form-group">
+                        <div class="form-group row">
+                            <div class="col-lg-2">
+                                <label> Valideur de l'action </label>
+                            </div>
+                            <div class="col-lg-3">
+                                <select class="form-control">
+                                    <option selected></option>
+                                    <option value="1">user1</option>
+                                    <option value="2">user2</option>
+                                </select>
+                            </div>
+                        </div>
+                        <button type="button" class="btn btn-outline-primary" style="margin-left:78%">Valider</button>
+                        <br>
+                        <div class="form-group row">
+                            <div class="col-lg-2">
+                                <label class="col-sm-3 col-form-label"> Action validée? </label>
+                            </div>
+                            <div class="col-lg-3">
+                                <div class="form-check">
+                                    <input class="form-check-input position-static" type="checkbox" id="blankCheckbox"
+                                           value="option1"
+                                           aria-label="...">
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </nb-card-body>
+            </nb-card>
         </div>
-        <!-- fin accordion-->
-
-      </div>
-
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save</button>
-      </div>
-
     </div>
-  </div>
+
+    <!-- detail-action -->
+    <div class="row">
+        <div class="col-md-12">
+            <nb-card class="inline-form-card">
+                <nb-card-header> Détail Action</nb-card-header>
+                <nb-card-body>
+                    <div class="dropdown ghost-dropdown" style="margin-left:78%" ngbDropdown>
+                        <button type="button" class="btn btn-outline-primary" ngbDropdownToggle> Détail Action
+                        </button>
+                        <ul class="dropdown-menu" ngbDropdownMenu>
+                            <li class="dropdown-item" (click)="open(content)">
+                                Ajouter
+                            </li>
+                            <!--<li class="dropdown-item" data-toggle="modal" data-target="#exampleModalCenter">
+                              Modifier
+                            </li>-->
+                            <li class="dropdown-item">
+                                Supprimer
+                        </ul>
+                    </div>
+                    <div class="ibox-content" style="margin-bottom:15px; margin-top: 10px">
+                        <table class="table table-hover no-margins">
+                            <thead>
+                            <tr>
+                                <th> Libelle Action</th>
+                                <th> Type</th>
+                                <th> Responsable</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            </tbody>
+                        </table>
+                    </div>
+                </nb-card-body>
+            </nb-card>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <nb-card class="inline-form-card">
+                <nb-card-header> Taux Action</nb-card-header>
+                <nb-card-body>
+                    <div class="row">
+                        <div class="col-lg-2">
+                            <label style="margin-left: 10px"> Taux de Réalisation </label>
+                        </div>
+                        <div class="col-lg-3">
+                            <input class="form-control" type="number" min="0" max="100">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-2">
+                            <label style="margin-left: 10px"> Taux d'efficacité </label>
+                        </div>
+                        <div class="col-lg-3">
+                            <input class="form-control" type="number" min="0" max="100">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-2">
+                            <label style="margin-left: 10px"> Observations </label>
+                        </div>
+                        <div class="col-lg-3">
+                            <div class="input-group">
+                                <textarea rows="5" placeholder="Text Area" class="form-control"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                </nb-card-body>
+            </nb-card>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <nb-card class="inline-form-card">
+                <nb-card-header> Cloture de l'action</nb-card-header>
+                <nb-card-body>
+                    <div class="row">
+                        <div class="col-lg-2">
+                            <label> Etat Action </label>
+                        </div>
+                        <div class="col-lg-3">
+                            <div class="form-group">
+                                <select class="form-control">
+                                    <option selected></option>
+                                    <option value="1"> Ouverte</option>
+                                    <option value="2"> Cloturer</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <br>
+                    <div class="row">
+                        <div class="col-lg-2">
+                            <label> Date de Cloture </label>
+                        </div>
+                        <div class="col-lg-3">
+                            <input class="form-control" type="date">
+                        </div>
+                    </div>
+                    <br>
+                    <div class="row">
+                        <div class="col-lg-2">
+                            <label> Observation cloture </label>
+                        </div>
+                        <div class="col-lg-3">
+                            <div class="input-group">
+                                <textarea rows="5" placeholder="Text Area" class="form-control"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                </nb-card-body>
+            </nb-card>
+        </div>
+    </div>
+    <br>
+    <!--Document-joint -->
+    <div class="row">
+        <div class="col-md-12">
+            <nb-card class="inline-form-card">
+                <nb-card-header> Document joint</nb-card-header>
+                <nb-card-body>
+                    <div class="dropdown ghost-dropdown" style="margin-left:78%" ngbDropdown>
+                        <button type="button" class="btn btn-outline-primary" ngbDropdownToggle> Document joint
+                        </button>
+                        <ul class="dropdown-menu" ngbDropdownMenu>
+                            <li class="dropdown-item">
+                                <button class="btn btn-outline btn-primary" data-toggle="modal"
+                                        data-target="#exampleModal" data-whatever="@mdo"
+                                        style="margin-left: 12px; margin-top: 5px">Ajouter
+                                </button>
+                            </li>
+                            <li class="dropdown-item">
+                                <button class="btn btn-outline btn-primary" data-toggle="modal"
+                                        data-target="#exampleModal" data-whatever="@mdo"
+                                        style="margin-left: 12px; margin-top: 5px"> Modifier
+                                </button>
+                            </li>
+                            <li class="dropdown-item">
+                                <button class="btn btn-outline btn-primary" style="margin-left: 12px; margin-top: 5px">
+                                    Supprimer
+                                </button>
+                            </li>
+                            <li class="divider"></li>
+                        </ul>
+                    </div>
+                    <br>
+                    <div class="ibox-content" style="margin-bottom:50px">
+                        <table class="table table-hover no-margins">
+                            <thead>
+                            <tr>
+                                <th> Nom Document</th>
+                                <th> Type</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            </tbody>
+                        </table>
+                    </div>
+                </nb-card-body>
+            </nb-card>
+        </div>
+    </div>
+    <div class="row">
+        <!-- Modal document-joint -->
+        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+             aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel"> Document joint</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <form>
+                            <div class="form-group">
+                                <label for="document-name" class="col-form-label"> Nom Document</label>
+                                <input type="text" class="form-control" id="document-name">
+                            </div>
+                            <div class="form-group">
+                                <label for="objet-text" class="col-form-label">Objet</label>
+                                <textarea class="form-control" id="objet-text"></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label for="date-creation" class="col-form-label"> Date de Création</label>
+                                <input type="text" class="form-control" id="date-creation">
+                            </div>
+                            <div class="form-group">
+                                <label for="observation-text" class="col-form-label">Observation</label>
+                                <textarea class="form-control" id="observation-text"></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-form-label">Fichier</label>
+                                <div class="custom-file">
+                                    <input type="file" class="custom-file-input" id="customFile">
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal"> Fermer</button>
+                        <button type="button" class="btn btn-primary"> Ajouter</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal detail-action -->
+    <ng-template #content let-modal>
+        <div class="modal-header">
+            <h4 class="modal-title" id="modal-basic-title">Détails Action</h4>
+            <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body">
+            <ngb-accordion [closeOthers]="true" activeIds="static-1">
+                <ngb-panel id="static-1">
+                    <ng-template ngbPanelTitle>
+                        <span><b style="color: #181818">Action</b></span>
+                    </ng-template>
+                    <ng-template ngbPanelContent>
+                        <div class="row">
+                            <div class="col-lg-3">
+                                <label style="margin-left: 10px"> Numero </label>
+                            </div>
+                            <div class="col-lg-6">
+                                <input class="form-control" type="number">
+                            </div>
+                        </div><br>
+                        <div class="row">
+                            <div class="col-lg-3">
+                                <label style="margin-left: 10px"> Type </label>
+                            </div>
+                            <div class="col-lg-6">
+                                <select class="custom-select">
+                                    <option selected></option>
+                                    <option value="1">AMELIORATION</option>
+                                    <option value="2">AMELIORATION</option>
+                                    <option value="3">AMELIORATION</option>
+                                </select>
+                            </div>
+                        </div>
+                        <br>
+                        <div class="row">
+                            <div class="col-lg-3">
+                                <label style="margin-left: 10px"> Action </label>
+                            </div>
+                            <div class="col-lg-6">
+                                <textarea rows="3" style="width: 230px"></textarea>
+                            </div>
+                        </div><br>
+                        <div class="row">
+                            <div class="col-lg-3">
+                                <label style="margin-left: 10px"> Observation </label>
+                            </div>
+                            <div class="col-lg-6">
+                                <textarea rows="3" style="width: 230px"></textarea>
+                            </div>
+                        </div><br>
+                        <div class="row">
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <label class="input-group-text" style="margin-left: 10px"> Resp.
+                                        Réalisation </label>
+                                    <select class="custom-select" style="margin-left: 35px; width: 230px ">
+                                        <option selected></option>
+                                        <option value="1">user1</option>
+                                        <option value="2">user2</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div><br>
+                        <div class="row">
+                            <div class="col-lg-3">
+                                <label style="margin-left: 10px"> Date debut réelle </label>
+                            </div>
+                            <div class="col-lg-3">
+                                <input class="form-control" type="date">
+                            </div>
+                            <div class="col-lg-3">
+                                <label style="margin-left: 10px"> Date Prev Début</label>
+                            </div>
+                            <div class="col-lg-3">
+                                <input class="form-control" type="date">
+                            </div>
+                        </div><br>
+                        <div class="row">
+                            <div class="col-lg-3">
+                                <label style="margin-left: 10px"> Date fin Réalisée</label>
+                            </div>
+                            <div class="col-lg-3">
+                                <input class="form-control" type="date">
+                            </div>
+                            <div class="col-lg-3">
+                                <label style="margin-left: 10px"> Date Prev Fin</label>
+                            </div>
+                            <div class="col-lg-3">
+                                <input class="form-control" type="date">
+                            </div>
+                        </div><br>
+                        <div class="row">
+                            <div class="col-lg-3">
+                                <label style="margin-left: 10px"> Réalisation </label>
+                            </div>
+                            <div class="col-lg-3">
+                                <textarea rows="3" style="width: 230px"></textarea>
+                            </div>
+                        </div><br>
+                        <div class="row">
+                            <div class="col-lg-3">
+                                <label style="margin-left: 10px"> Observation Réalisation </label>
+                            </div>
+                            <div class="col-lg-3">
+                                <textarea rows="3" style="width: 230px"></textarea>
+                            </div>
+                        </div><br>
+                    </ng-template>
+                </ngb-panel>
+                <ngb-panel id="static-2">
+                    <ng-template ngbPanelTitle>
+                        <span><b style="color: #181818">Suivi Réalisation</b></span>
+                    </ng-template>
+                    <ng-template ngbPanelContent>
+                        <div class="row">
+                            <div class="col-lg-3">
+                                <label class="input-group-text" style="margin-left: 10px"> Resp.
+                                    Suivi </label>
+                            </div>
+                            <div class="col-lg-3">
+                                <select class="custom-select" id="inputGroupSelect07" style="width: 100px">
+                                    <option selected></option>
+                                    <option value="1">user1</option>
+                                    <option value="2">user2</option>
+                                </select>
+                            </div>
+                            <div class="col-lg-3">
+                                <label style="margin-left: 10px"> Date de Suivi </label>
+                            </div>
+                            <div class="col-lg-3">
+                                <input class="form-control" type="date">
+                            </div>
+                        </div><br>
+                        <div class="row">
+                            <div class="col-lg-3">
+                                <label style="margin-left: 10px"> Taux de Réalisation </label>
+                            </div>
+                            <div class="col-lg-3">
+                                <input class="form-control" type="number">
+                            </div>
+                            <div class="col-lg-3">
+                                <label class="input-group-text" style="margin-left: 10px"> Etat
+                                    Action </label>
+                            </div>
+                            <div class="col-lg-3">
+                                <select class="custom-select" style="width: 100px">
+                                    <option selected></option>
+                                    <option value="1"> Réalisée</option>
+                                    <option value="2"> Non Réalisée</option>
+                                </select>
+                            </div>
+                        </div><br>
+                        <div class="row">
+                            <div class="col-lg-3">
+                                <label style="margin-left: 10px"> Observation Suivi </label>
+                            </div>
+                            <div class="col-lg-3">
+                                <textarea rows="3" style="width: 230px"></textarea>
+                            </div>
+                        </div>
+                    </ng-template>
+                </ngb-panel>
+                <ngb-panel id="static-3" > 
+                    <ng-template ngbPanelTitle>
+                        <span><b style="color: #181818">Suivi Efficacité</b></span>
+                    </ng-template>
+                    <ng-template ngbPanelContent>
+                        <div class="row">
+                            <div class="col-lg-3">
+                                <label class="input-group-text" style="margin-left: 10px"> Resp. Mesure
+                                    Eff </label>
+                            </div>
+                            <div class="col-lg-3">
+                                <select class="custom-select" id="inputGroupSelect09" style="width: 100px">
+                                    <option selected></option>
+                                    <option value="1">user1</option>
+                                    <option value="2">user2</option>
+                                </select>
+                            </div>
+                            <div class="col-lg-3">
+                                <label style="margin-left: 10px"> Date Mesure Eff </label>
+                            </div>
+                            <div class="col-lg-3">
+                                <input class="form-control" type="date">
+                            </div>
+                        </div><br>
+                        <div class="row">
+                            <div class="col-lg-3">
+                                <label style="margin-left: 10px"> Taux d'efficacité </label>
+                            </div>
+                            <div class="col-lg-3">
+                                <input class="form-control" type="number">
+                            </div>
+                            <div class="col-lg-3">
+                                <label class="input-group-text" style="margin-left: 10px"> Etat
+                                    Efficacite </label>
+                            </div>
+                            <div class="col-lg-3">
+                                <select class="custom-select" style="width: 100px">
+                                    <option selected></option>
+                                    <option value="1"> Efficace</option>
+                                    <option value="2"> Non Efficace</option>
+                                </select>
+                            </div>
+                        </div><br>
+                        <div class="row">
+                            <div class="col-lg-3">
+                                <label style="margin-left: 10px"> Obs. Efficacité </label>
+                            </div>
+                            <div class="col-lg-3">
+                                <textarea rows="3" style="width: 230px"></textarea>
+                            </div>
+                        </div>
+                    </ng-template>
+                </ngb-panel>
+                <ngb-panel id="static-4">
+                    <ng-template ngbPanelTitle>
+                        <span><b style="color: #181818">Suivi Cout</b></span>
+                    </ng-template>
+                    <ng-template ngbPanelContent>
+                        <div class="row">
+                            <div class="col-lg-3">
+                                <label style="margin-left:10px;margin-top: 10px"> Cout MO Prévisionnel </label>
+                            </div>
+                            <div class="col-lg-3">
+                                <input class="form-control" type="number">
+                            </div>
+                            <div class="col-lg-3">
+                                <label style="margin-left: 10px;margin-top: 10px"> Cout MO Réel</label>
+                            </div>
+                            <div class="col-lg-3">
+                                <input class="form-control" type="number">
+                            </div>
+                        </div><br>
+                        <div class="row">
+                            <div class="col-lg-3">
+                                <label style="margin-left: 10px;margin-top: 10px"> Cout Materiel Prévisionnel </label>
+                            </div>
+                            <div class="col-lg-3">
+                                <input class="form-control" type="number">
+                            </div>
+                            <div class="col-lg-3">
+                                <label style="margin-left: 10px;margin-top: 10px"> Cout Materiel Réel</label>
+                            </div>
+                            <div class="col-lg-3">
+                                <input class="form-control" type="number">
+                            </div>
+                        </div><br>
+                        <div class="row">
+                            <div class="col-lg-3">
+                                <label style="margin-left: 10px;margin-top: 10px"> Total MO Prévisionnel </label>
+                            </div>
+                            <div class="col-lg-3">
+                                <input class="form-control" type="number">
+                            </div>
+                            <div class="col-lg-3">
+                                <label style="margin-left: 10px;margin-top: 10px"> Total MO Réel</label>
+                            </div>
+                            <div class="col-lg-3">
+                                <input class="form-control" type="number">
+                            </div>
+                        </div>
+                    </ng-template>
+                </ngb-panel>
+            </ngb-accordion>
+
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" (click)="modal.close('Save click')">Close</button>
+            <button type="button" class="btn btn-primary">Save</button>
+        </div>
+    </ng-template>
+
+
 </div>

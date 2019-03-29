@@ -5714,6 +5714,12 @@ ngx-echarts@^4.0.1:
   dependencies:
     tslib "^1.9.0"
 
+ngx-spinner@^7.0.0:
+  version "7.0.0"
+  resolved "https://registry.yarnpkg.com/ngx-spinner/-/ngx-spinner-7.0.0.tgz#44762ef684361a928ae58e73569c543e20ac0bd1"
+  dependencies:
+    tslib "^1.9.0"
+
 nice-try@^1.0.4:
   version "1.0.5"
   resolved "https://registry.yarnpkg.com/nice-try/-/nice-try-1.0.5.tgz#a3378a7696ce7d223e88fc9b764bd7ef1089e366"

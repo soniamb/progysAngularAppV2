@@ -12,6 +12,7 @@ import { ProgysComponent } from './progys.component';
 // service
 import { NewsService } from './services/news.service';
 import {ActionsComponent} from "./actions/actions.component";
+import {NgxSpinnerModule} from "ngx-spinner";
 
 const COMPONENTS = [
     ProgysComponent,
@@ -27,6 +28,7 @@ const MODULES = [
   ProgysRoutingModule,
   TreeModule,
   ToasterModule.forRoot(),
+    NgxSpinnerModule
 ];
 
 @NgModule({
