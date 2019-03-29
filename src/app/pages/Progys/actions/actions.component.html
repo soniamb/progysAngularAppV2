@@ -10,6 +10,105 @@
 <!--Liste des actions-->
 <div *ngIf="add_action == false">
 
+  <div class="row">
+    <div class="col-md-12">
+      <nb-card class="inline-form-card">
+        <nb-card-header> Chercher ...</nb-card-header>
+        <nb-card-body>
+          <div class="row">
+            <div class="col-lg-2">
+              <label style="margin-top: 15px"> Code </label>
+            </div>
+            <div class="col-lg-3">
+              <input class="form-control" type="text">
+            </div>
+            <div class="col-lg-2">
+              <label style="margin-top: 15px"> Type </label>
+            </div>
+            <div class="col-lg-3">
+              <input class="form-control" type="text">
+            </div>
+          </div>
+          <br>
+          <div class="row">
+            <div class="col-lg-2">
+              <label style="margin-top: 15px"> Categorie </label>
+            </div>
+            <div class="col-lg-3">
+              <select class="form-control">
+                <option selected></option>
+                <option value="AMELIORATION">AMELIORATION</option>
+                <option value="VERIFICATION">VERIFICATION</option>
+                <option value="AUTRE">AUTRE</option>
+              </select>
+            </div>
+            <div class="col-lg-2">
+              <label style="margin-top: 15px" > Priorite </label>
+            </div>
+            <div class="col-lg-3">
+              <input class="form-control" type="text">
+            </div>
+          </div>
+          <br>
+          <div class="row">
+            <div class="col-lg-2">
+              <label style="margin-top: 15px"> Demandeur </label>
+            </div>
+            <div class="col-lg-3">
+              <select class="form-control">
+                <option selected></option>
+                <option value="AMELIORATION">User1</option>
+                <option value="VERIFICATION">User2</option>
+                <option value="AUTRE">AUTRE</option>
+              </select>
+            </div>
+            <div class="col-lg-2">
+              <label style="margin-top: 15px" > Origine </label>
+            </div>
+            <div class="col-lg-3">
+              <input class="form-control" type="text">
+            </div>
+          </div>
+          <br>
+          <div class="row">
+            <div class="col-lg-2">
+              <label> Date de Creation </label>
+            </div>
+            <div class="col-lg-3">
+              <label> De </label>
+              <input type="date" style="width: 93px" >
+              <label> A </label>
+              <input type="date" style="width: 93px" >
+            </div>
+            <div class="col-lg-2">
+              <label style="margin-top: 15px" > Mot Cle </label>
+            </div>
+            <div class="col-lg-3">
+              <input class="form-control" type="text">
+            </div>
+          </div>
+          <br>
+          <div class="row">
+            <div class="col-lg-2">
+              <label> ETAT ACTION</label>
+            </div>
+            <div class="col-lg-3">
+              <input type="radio" name="etat"> <label>OUVERTE</label>
+              &nbsp;
+              <input type="radio" name="etat"> <label>CLOTUREE</label>
+            </div>
+            <div class="col-lg-2">
+            </div>
+            <div class="col-lg-3">
+              <button type="button" class="btn btn-outline-primary" style="margin-left: 80%">Chercher</button>
+            </div>
+          </div>
+
+        </nb-card-body>
+      </nb-card>
+    </div>
+  </div>
+
     <div class="row">
         <div class="col-md-12">
             <nb-card class="inline-form-card">
@@ -21,6 +120,12 @@
                         <ul class="dropdown-menu" ngbDropdownMenu>
                             <li class="dropdown-item" (click)="showHideAddAction()"> Ajouter</li>
                         </ul>
+                      <ul class="dropdown-menu" ngbDropdownMenu>
+                        <li class="dropdown-item" (click)="showHideAddAction()"> Modifier</li>
+                      </ul>
+                      <ul class="dropdown-menu" ngbDropdownMenu>
+                        <li class="dropdown-item" > Supprimer</li>
+                      </ul>
                     </div>
                     <div class="ibox-content" style="margin-bottom:15px; margin-top: 10px">
                         <table class="table table-hover no-margins">
