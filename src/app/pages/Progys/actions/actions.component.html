@@ -74,11 +74,11 @@
                         <div class="col-lg-2">
                             <label> Date de Creation </label>
                         </div>
-                        <div class="col-lg-3">
+                        <div class="col-lg-8">
                             <label> De </label>
-                            <input [(ngModel)]="search.dateDe" type="date" style="width: 93px">
-                            <label> A </label>
-                            <input [(ngModel)]="search.dateA" type="date" style="width: 93px">
+                            <input [(ngModel)]="search.dateDe" type="date" style="margin-left: 20px;margin-right: 10px">
+                            <label> à </label>
+                            <input [(ngModel)]="search.dateA" type="date" style="margin-left: 20px">
                         </div>
                         <!--<div class="col-lg-2">
                             <label style="margin-top: 15px"> Mot Cle </label>
@@ -93,9 +93,9 @@
                             <label> ETAT ACTION</label>
                         </div>
                         <div class="col-lg-3">
-                            <input type="radio" name="etat"> <label>OUVERTE</label>
+                            <input [(ngModel)]="search.etat" type="radio" name="r1" value="Ouverte"> <label>OUVERTE</label>
                             &nbsp;
-                            <input type="radio" name="etat"> <label>CLOTUREE</label>
+                            <input [(ngModel)]="search.etat" type="radio" name="r2" value="Cloturer"> <label>CLOTUREE</label>
                         </div>
                         <div class="col-lg-2">
                             <button (click)="annulerSearch()" type="button" class="btn btn-outline-primary" style="margin-left: 80%">

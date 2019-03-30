@@ -3,6 +3,7 @@ import { NbDateService } from '@nebular/theme';
 import {ActionApiService} from "../../../services/actionModule/action-api.service";
 import { NgxSpinnerService } from 'ngx-spinner';
 import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
+import * as moment from 'moment';
 
 @Component({
   selector: 'ngx-alert',
@@ -97,12 +98,20 @@ export class ActionsComponent {
     }
 
     searchActions(){
+
+        /*console.log(Date.parse(moment(this.actions[0].date_creation).format('YYYY-MM-DD')));
+        console.log(Date.parse(this.search.dateDe));
+        console.log(Date.parse(moment(this.actions[0].date_creation).format('DD MM YYYY')));*/
+
         this.actions = this.actions.filter( x => (this.search.code =='' || x.code == this.search.code) &&
                                           ( this.search.type =='' || x.type == this.search.type) &&
                                           ( this.search.categorie =='' || x.categorie == this.search.categorie) &&
                                           ( this.search.priorite =='' || x.priorite == this.search.priorite) &&
                                           ( this.search.demandeur =='' || x.demandeur == this.search.demandeur) &&
-                                          ( this.search.code_origine =='' || x.code_origine == this.search.code_origine));
+                                          ( this.search.code_origine =='' || x.code_origine == this.search.code_origine) &&
+                                          ( this.search.etat =='' || x.etat == this.search.etat) &&
+            ( this.search.dateDe =='' || Date.parse(moment(x.date_creation).format('YYYY-MM-DD')) >= Date.parse(this.search.dateDe)) &&
+            ( this.search.dateA =='' || Date.parse(moment(x.date_creation).format('YYYY-MM-DD')) <= Date.parse(this.search.dateA)));
     }
     annulerSearch(){
       this.actions = this.actionsCopy;
