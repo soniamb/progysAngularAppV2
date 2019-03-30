@@ -12,7 +12,23 @@ import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
 export class ActionsComponent {
 
     actions = [];
+    actionsCopy =[];
     add_action=false;
+    update =false;
+
+    search = {
+        code:'',
+        code_origine:'',
+        type:'',
+        categorie:'',
+        priorite:'',
+        demandeur:'',
+        origine:'',
+        etat:'',
+        dateDe:'',
+        dateA:''
+    };
+
     action = {
         code:'',
         type:'',
@@ -22,7 +38,13 @@ export class ActionsComponent {
         analy_causes:'',
         categorie:'',
         desc_prob:'',
-        code_origine:''
+        code_origine:'',
+        taux_realisation:'',
+        taux_efficacite:'',
+        observation:'',
+        etat:'',
+        date_cloture:'',
+        observation_cloture:''
     };
     closeResult: string;
 
@@ -32,6 +54,7 @@ export class ActionsComponent {
       this.actionservice.getActions().subscribe(res => {
           console.log(res);
           this.actions = res['data'];
+          this.actionsCopy = res['data'];
 
       }, error => {
           console.log(error);
@@ -60,6 +83,7 @@ export class ActionsComponent {
             this.actionservice.getActions().subscribe(res => {
                 console.log(res);
                 this.actions = res['data'];
+                this.actionsCopy = res['data'];
                 this.spinner.hide();
                 this.add_action = !this.add_action;
 
@@ -70,6 +94,18 @@ export class ActionsComponent {
             console.log(error);
         });
 
+    }
+
+    searchActions(){
+        this.actions = this.actions.filter( x => (this.search.code =='' || x.code == this.search.code) &&
+                                          ( this.search.type =='' || x.type == this.search.type) &&
+                                          ( this.search.categorie =='' || x.categorie == this.search.categorie) &&
+                                          ( this.search.priorite =='' || x.priorite == this.search.priorite) &&
+                                          ( this.search.demandeur =='' || x.demandeur == this.search.demandeur) &&
+                                          ( this.search.code_origine =='' || x.code_origine == this.search.code_origine));
+    }
+    annulerSearch(){
+      this.actions = this.actionsCopy;
     }
 
 }

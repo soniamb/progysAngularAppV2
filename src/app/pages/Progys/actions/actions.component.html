@@ -10,106 +10,109 @@
 <!--Liste des actions-->
 <div *ngIf="add_action == false">
 
-  <div class="row">
-    <div class="col-md-12">
-      <nb-card class="inline-form-card">
-        <nb-card-header> Chercher ...</nb-card-header>
-        <nb-card-body>
-          <div class="row">
-            <div class="col-lg-2">
-              <label style="margin-top: 15px"> Code </label>
-            </div>
-            <div class="col-lg-3">
-              <input class="form-control" type="text">
-            </div>
-            <div class="col-lg-2">
-              <label style="margin-top: 15px"> Type </label>
-            </div>
-            <div class="col-lg-3">
-              <input class="form-control" type="text">
-            </div>
-          </div>
-          <br>
-          <div class="row">
-            <div class="col-lg-2">
-              <label style="margin-top: 15px"> Categorie </label>
-            </div>
-            <div class="col-lg-3">
-              <select class="form-control">
-                <option selected></option>
-                <option value="AMELIORATION">AMELIORATION</option>
-                <option value="VERIFICATION">VERIFICATION</option>
-                <option value="AUTRE">AUTRE</option>
-              </select>
-            </div>
-            <div class="col-lg-2">
-              <label style="margin-top: 15px" > Priorite </label>
-            </div>
-            <div class="col-lg-3">
-              <input class="form-control" type="text">
-            </div>
-          </div>
-          <br>
-          <div class="row">
-            <div class="col-lg-2">
-              <label style="margin-top: 15px"> Demandeur </label>
-            </div>
-            <div class="col-lg-3">
-              <select class="form-control">
-                <option selected></option>
-                <option value="AMELIORATION">User1</option>
-                <option value="VERIFICATION">User2</option>
-                <option value="AUTRE">AUTRE</option>
-              </select>
-            </div>
-            <div class="col-lg-2">
-              <label style="margin-top: 15px" > Origine </label>
-            </div>
-            <div class="col-lg-3">
-              <input class="form-control" type="text">
-            </div>
-          </div>
-          <br>
-          <div class="row">
-            <div class="col-lg-2">
-              <label> Date de Creation </label>
-            </div>
-            <div class="col-lg-3">
-              <label> De </label>
-              <input type="date" style="width: 93px" >
-              <label> A </label>
-              <input type="date" style="width: 93px" >
-            </div>
-            <div class="col-lg-2">
-              <label style="margin-top: 15px" > Mot Cle </label>
-            </div>
-            <div class="col-lg-3">
-              <input class="form-control" type="text">
-            </div>
-          </div>
-          <br>
-          <div class="row">
-            <div class="col-lg-2">
-              <label> ETAT ACTION</label>
-            </div>
-            <div class="col-lg-3">
-              <input type="radio" name="etat"> <label>OUVERTE</label>
-              &nbsp;
-              <input type="radio" name="etat"> <label>CLOTUREE</label>
-            </div>
-            <div class="col-lg-2">
-            </div>
-            <div class="col-lg-3">
-              <button type="button" class="btn btn-outline-primary" style="margin-left: 80%">Chercher</button>
-            </div>
-          </div>
-
-        </nb-card-body>
-      </nb-card>
-    </div>
-  </div>
-
     <div class="row">
+        <div class="col-md-12">
+            <nb-card class="inline-form-card">
+                <nb-card-header> Chercher ...</nb-card-header>
+                <nb-card-body>
+                    <div class="row">
+                        <div class="col-lg-2">
+                            <label style="margin-top: 15px"> Code </label>
+                        </div>
+                        <div class="col-lg-3">
+                            <input [(ngModel)]="search.code" class="form-control" type="text">
+                        </div>
+                        <div class="col-lg-2">
+                            <label style="margin-top: 15px"> Type </label>
+                        </div>
+                        <div class="col-lg-3">
+                            <input [(ngModel)]="search.type" class="form-control" type="text">
+                        </div>
+                    </div>
+                    <br>
+                    <div class="row">
+                        <div class="col-lg-2">
+                            <label style="margin-top: 15px"> Categorie </label>
+                        </div>
+                        <div class="col-lg-3">
+                            <select [(ngModel)]="search.categorie" class="form-control">
+                                <option selected></option>
+                                <option value="AMELIORATION">AMELIORATION</option>
+                                <option value="VERIFICATION">VERIFICATION</option>
+                                <option value="AUTRE">AUTRE</option>
+                            </select>
+                        </div>
+                        <div class="col-lg-2">
+                            <label style="margin-top: 15px"> Priorite </label>
+                        </div>
+                        <div class="col-lg-3">
+                            <input [(ngModel)]="search.priorite" class="form-control" type="text">
+                        </div>
+                    </div>
+                    <br>
+                    <div class="row">
+                        <div class="col-lg-2">
+                            <label style="margin-top: 15px"> Demandeur </label>
+                        </div>
+                        <div class="col-lg-3">
+                            <select [(ngModel)]="search.demandeur" class="form-control">
+                                <option selected></option>
+                                <option value="User1">User1</option>
+                                <option value="User2">User2</option>
+                                <option value="AUTRE">AUTRE</option>
+                            </select>
+                        </div>
+                        <div class="col-lg-2">
+                            <label style="margin-top: 15px">Code Origine </label>
+                        </div>
+                        <div class="col-lg-3">
+                            <input [(ngModel)]="search.code_origine" class="form-control" type="text">
+                        </div>
+                    </div>
+                    <br>
+                    <div class="row">
+                        <div class="col-lg-2">
+                            <label> Date de Creation </label>
+                        </div>
+                        <div class="col-lg-3">
+                            <label> De </label>
+                            <input [(ngModel)]="search.dateDe" type="date" style="width: 93px">
+                            <label> A </label>
+                            <input [(ngModel)]="search.dateA" type="date" style="width: 93px">
+                        </div>
+                        <!--<div class="col-lg-2">
+                            <label style="margin-top: 15px"> Mot Cle </label>
+                        </div>
+                        <div class="col-lg-3">
+                            <input class="form-control" type="text">
+                        </div>-->
+                    </div>
+                    <br>
+                    <div class="row">
+                        <div class="col-lg-2">
+                            <label> ETAT ACTION</label>
+                        </div>
+                        <div class="col-lg-3">
+                            <input type="radio" name="etat"> <label>OUVERTE</label>
+                            &nbsp;
+                            <input type="radio" name="etat"> <label>CLOTUREE</label>
+                        </div>
+                        <div class="col-lg-2">
+                            <button (click)="annulerSearch()" type="button" class="btn btn-outline-primary" style="margin-left: 80%">
+                                Annuler
+                            </button>
+                        </div>
+                        <div class="col-lg-2">
+                            <button (click)="searchActions()" type="button" class="btn btn-outline-primary" style="margin-left: 80%">
+                                Chercher
+                            </button>
+                        </div>
+                    </div>
+
+                </nb-card-body>
+            </nb-card>
+        </div>
+
         <div class="col-md-12">
             <nb-card class="inline-form-card">
                 <nb-card-header> List des actions</nb-card-header>
@@ -120,12 +123,12 @@
                         <ul class="dropdown-menu" ngbDropdownMenu>
                             <li class="dropdown-item" (click)="showHideAddAction()"> Ajouter</li>
                         </ul>
-                      <ul class="dropdown-menu" ngbDropdownMenu>
-                        <li class="dropdown-item" (click)="showHideAddAction()"> Modifier</li>
-                      </ul>
-                      <ul class="dropdown-menu" ngbDropdownMenu>
-                        <li class="dropdown-item" > Supprimer</li>
-                      </ul>
+                        <ul class="dropdown-menu" ngbDropdownMenu>
+                            <li class="dropdown-item" (click)="showHideAddAction()"> Modifier</li>
+                        </ul>
+                        <ul class="dropdown-menu" ngbDropdownMenu>
+                            <li class="dropdown-item"> Supprimer</li>
+                        </ul>
                     </div>
                     <div class="ibox-content" style="margin-bottom:15px; margin-top: 10px">
                         <table class="table table-hover no-margins">
@@ -255,7 +258,7 @@
                         </div>
                         <div class="col-lg-3">
                             <div class="input-group">
-              <textarea [(ngModel)]="action.desc_probleme" rows="5" placeholder="Text Area"
+              <textarea [(ngModel)]="action.desc_prob" rows="5" placeholder="Text Area"
                         class="form-control"></textarea>
                             </div>
                         </div>
@@ -285,8 +288,9 @@
                         </div>
                         <div class="col-lg-3">
                             <div class="input-group">
-              <textarea [(ngModel)]="action.analy_causes" rows="5" placeholder="Text Area"
-                        class="form-control"></textarea>
+                     <textarea [(ngModel)]="action.analy_causes" rows="5" placeholder="Text Area"
+                               class="form-control">
+                     </textarea>
                             </div>
                         </div>
                     </div>
@@ -296,7 +300,7 @@
     </div>
     <br>
     <!-- validation action -->
-    <div class="row">
+    <!--<div class="row">
         <div class="col-md-12">
             <nb-card class="inline-form-card">
                 <nb-card-header> Validation de l'action</nb-card-header>
@@ -332,45 +336,51 @@
                 </nb-card-body>
             </nb-card>
         </div>
-    </div>
+    </div>-->
 
     <!-- detail-action -->
-    <div class="row">
-        <div class="col-md-12">
-            <nb-card class="inline-form-card">
-                <nb-card-header> Détail Action</nb-card-header>
-                <nb-card-body>
-                    <div class="dropdown ghost-dropdown" style="margin-left:78%" ngbDropdown>
-                        <button type="button" class="btn btn-outline-primary" ngbDropdownToggle> Détail Action
-                        </button>
-                        <ul class="dropdown-menu" ngbDropdownMenu>
-                            <li class="dropdown-item" (click)="open(content)">
-                                Ajouter
-                            </li>
-                            <!--<li class="dropdown-item" data-toggle="modal" data-target="#exampleModalCenter">
-                              Modifier
-                            </li>-->
-                            <li class="dropdown-item">
-                                Supprimer
-                        </ul>
-                    </div>
-                    <div class="ibox-content" style="margin-bottom:15px; margin-top: 10px">
-                        <table class="table table-hover no-margins">
-                            <thead>
-                            <tr>
-                                <th> Libelle Action</th>
-                                <th> Type</th>
-                                <th> Responsable</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            </tbody>
-                        </table>
-                    </div>
-                </nb-card-body>
-            </nb-card>
+    <div *ngIf="update == true">
+        <div class="row">
+            <div class="col-md-12">
+                <nb-card class="inline-form-card">
+                    <nb-card-header> Détail Action</nb-card-header>
+                    <nb-card-body>
+                        <div class="dropdown ghost-dropdown" style="margin-left:78%" ngbDropdown>
+                            <button type="button" class="btn btn-outline-primary" ngbDropdownToggle> Détail Action
+                            </button>
+                            <ul class="dropdown-menu" ngbDropdownMenu>
+                                <li class="dropdown-item" (click)="open(content)">
+                                    Ajouter
+                                </li>
+                                <!--<li class="dropdown-item" data-toggle="modal" data-target="#exampleModalCenter">
+                                  Modifier
+                                </li>-->
+                                <li class="dropdown-item">
+                                    Supprimer
+                            </ul>
+                        </div>
+                        <div class="ibox-content" style="margin-bottom:15px; margin-top: 10px">
+                            <table class="table table-hover no-margins">
+                                <thead>
+                                <tr>
+                                    <th> Libelle Action</th>
+                                    <th> Type</th>
+                                    <th> Responsable</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                </tbody>
+                            </table>
+                        </div>
+                    </nb-card-body>
+                </nb-card>
+            </div>
         </div>
     </div>
+
+
+    <!--Taux Action-->
+
     <div class="row">
         <div class="col-md-12">
             <nb-card class="inline-form-card">
@@ -381,7 +391,7 @@
                             <label style="margin-left: 10px"> Taux de Réalisation </label>
                         </div>
                         <div class="col-lg-3">
-                            <input class="form-control" type="number" min="0" max="100">
+                            <input [(ngModel)]="action.taux_realisation" class="form-control" type="text">
                         </div>
                     </div>
                     <div class="row">
@@ -389,7 +399,7 @@
                             <label style="margin-left: 10px"> Taux d'efficacité </label>
                         </div>
                         <div class="col-lg-3">
-                            <input class="form-control" type="number" min="0" max="100">
+                            <input [(ngModel)]="action.taux_efficacite" class="form-control" type="text">
                         </div>
                     </div>
                     <div class="row">
@@ -398,7 +408,8 @@
                         </div>
                         <div class="col-lg-3">
                             <div class="input-group">
-                                <textarea rows="5" placeholder="Text Area" class="form-control"></textarea>
+                                <textarea [(ngModel)]="action.observation" rows="5" placeholder=""
+                                          class="form-control"></textarea>
                             </div>
                         </div>
                     </div>
@@ -406,6 +417,8 @@
             </nb-card>
         </div>
     </div>
+
+    <!--Cloture-->
     <div class="row">
         <div class="col-md-12">
             <nb-card class="inline-form-card">
@@ -417,10 +430,10 @@
                         </div>
                         <div class="col-lg-3">
                             <div class="form-group">
-                                <select class="form-control">
+                                <select [(ngModel)]="action.etat" class="form-control">
                                     <option selected></option>
-                                    <option value="1"> Ouverte</option>
-                                    <option value="2"> Cloturer</option>
+                                    <option value="Ouverte"> Ouverte</option>
+                                    <option value="Cloturer"> Cloturer</option>
                                 </select>
                             </div>
                         </div>
@@ -431,7 +444,7 @@
                             <label> Date de Cloture </label>
                         </div>
                         <div class="col-lg-3">
-                            <input class="form-control" type="date">
+                            <input [(ngModel)]="action.date_cloture" class="form-control" type="date">
                         </div>
                     </div>
                     <br>
@@ -441,7 +454,8 @@
                         </div>
                         <div class="col-lg-3">
                             <div class="input-group">
-                                <textarea rows="5" placeholder="Text Area" class="form-control"></textarea>
+                                <textarea [(ngModel)]="action.observation_cloture" rows="5" placeholder=""
+                                          class="form-control"></textarea>
                             </div>
                         </div>
                     </div>
@@ -450,6 +464,8 @@
         </div>
     </div>
     <br>
+
+
     <!--Document-joint -->
     <div class="row">
         <div class="col-md-12">
@@ -566,7 +582,8 @@
                             <div class="col-lg-6">
                                 <input class="form-control" type="number">
                             </div>
-                        </div><br>
+                        </div>
+                        <br>
                         <div class="row">
                             <div class="col-lg-3">
                                 <label style="margin-left: 10px"> Type </label>
@@ -588,7 +605,8 @@
                             <div class="col-lg-6">
                                 <textarea rows="3" style="width: 230px"></textarea>
                             </div>
-                        </div><br>
+                        </div>
+                        <br>
                         <div class="row">
                             <div class="col-lg-3">
                                 <label style="margin-left: 10px"> Observation </label>
@@ -596,7 +614,8 @@
                             <div class="col-lg-6">
                                 <textarea rows="3" style="width: 230px"></textarea>
                             </div>
-                        </div><br>
+                        </div>
+                        <br>
                         <div class="row">
                             <div class="input-group mb-3">
                                 <div class="input-group-prepend">
@@ -609,7 +628,8 @@
                                     </select>
                                 </div>
                             </div>
-                        </div><br>
+                        </div>
+                        <br>
                         <div class="row">
                             <div class="col-lg-3">
                                 <label style="margin-left: 10px"> Date debut réelle </label>
@@ -623,7 +643,8 @@
                             <div class="col-lg-3">
                                 <input class="form-control" type="date">
                             </div>
-                        </div><br>
+                        </div>
+                        <br>
                         <div class="row">
                             <div class="col-lg-3">
                                 <label style="margin-left: 10px"> Date fin Réalisée</label>
@@ -637,7 +658,8 @@
                             <div class="col-lg-3">
                                 <input class="form-control" type="date">
                             </div>
-                        </div><br>
+                        </div>
+                        <br>
                         <div class="row">
                             <div class="col-lg-3">
                                 <label style="margin-left: 10px"> Réalisation </label>
@@ -645,7 +667,8 @@
                             <div class="col-lg-3">
                                 <textarea rows="3" style="width: 230px"></textarea>
                             </div>
-                        </div><br>
+                        </div>
+                        <br>
                         <div class="row">
                             <div class="col-lg-3">
                                 <label style="margin-left: 10px"> Observation Réalisation </label>
@@ -653,7 +676,8 @@
                             <div class="col-lg-3">
                                 <textarea rows="3" style="width: 230px"></textarea>
                             </div>
-                        </div><br>
+                        </div>
+                        <br>
                     </ng-template>
                 </ngb-panel>
                 <ngb-panel id="static-2">
@@ -679,7 +703,8 @@
                             <div class="col-lg-3">
                                 <input class="form-control" type="date">
                             </div>
-                        </div><br>
+                        </div>
+                        <br>
                         <div class="row">
                             <div class="col-lg-3">
                                 <label style="margin-left: 10px"> Taux de Réalisation </label>
@@ -698,7 +723,8 @@
                                     <option value="2"> Non Réalisée</option>
                                 </select>
                             </div>
-                        </div><br>
+                        </div>
+                        <br>
                         <div class="row">
                             <div class="col-lg-3">
                                 <label style="margin-left: 10px"> Observation Suivi </label>
@@ -709,7 +735,7 @@
                         </div>
                     </ng-template>
                 </ngb-panel>
-                <ngb-panel id="static-3" >
+                <ngb-panel id="static-3">
                     <ng-template ngbPanelTitle>
                         <span><b style="color: #181818">Suivi Efficacité</b></span>
                     </ng-template>
@@ -732,7 +758,8 @@
                             <div class="col-lg-3">
                                 <input class="form-control" type="date">
                             </div>
-                        </div><br>
+                        </div>
+                        <br>
                         <div class="row">
                             <div class="col-lg-3">
                                 <label style="margin-left: 10px"> Taux d'efficacité </label>
@@ -751,7 +778,8 @@
                                     <option value="2"> Non Efficace</option>
                                 </select>
                             </div>
-                        </div><br>
+                        </div>
+                        <br>
                         <div class="row">
                             <div class="col-lg-3">
                                 <label style="margin-left: 10px"> Obs. Efficacité </label>
@@ -780,7 +808,8 @@
                             <div class="col-lg-3">
                                 <input class="form-control" type="number">
                             </div>
-                        </div><br>
+                        </div>
+                        <br>
                         <div class="row">
                             <div class="col-lg-3">
                                 <label style="margin-left: 10px;margin-top: 10px"> Cout Materiel Prévisionnel </label>
@@ -794,7 +823,8 @@
                             <div class="col-lg-3">
                                 <input class="form-control" type="number">
                             </div>
-                        </div><br>
+                        </div>
+                        <br>
                         <div class="row">
                             <div class="col-lg-3">
                                 <label style="margin-left: 10px;margin-top: 10px"> Total MO Prévisionnel </label>
