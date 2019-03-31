@@ -392,12 +392,30 @@
                             <table class="table table-hover no-margins">
                                 <thead>
                                 <tr>
-                                    <th> Libelle Action</th>
-                                    <th> Type</th>
-                                    <th> Responsable</th>
+                                    <th>Id</th>
+                                    <th>Numero</th>
+                                    <th>Observation</th>
+                                    <th>Responsable Réalisation</th>
+                                    <th>Date Début Réalisation</th>
+                                    <th>Responsable Suivi</th>
+                                    <th>Date Suivi</th>
+                                    <th>Responsable Mesure Effic.</th>
                                 </tr>
                                 </thead>
                                 <tbody>
+                                <tr *ngFor="let dc of detailsAction;let i=index;">
+                                    <td>
+                                        <small></small>
+                                        {{dc.id}}
+                                    </td>
+                                    <td>{{dc.numero}}</td>
+                                    <td>{{dc.observation}}</td>
+                                    <td>{{dc.resp_realisation}}</td>
+                                    <td>{{dc.date_debut_reel | date:'dd MMM yyyy'}}</td>
+                                    <td>{{dc.resp_suivi}}</td>
+                                    <td>{{dc.date_suivi | date:'dd MMM yyyy'}}</td>
+                                    <td>{{dc.resp_mesure_efficacite}}</td>
+                                </tr>
                                 </tbody>
                             </table>
                         </div>
@@ -589,6 +607,8 @@
         </div>
     </div>
 
+
+
     <!-- Modal detail-action -->
     <ng-template #content let-modal>
         <div class="modal-header">
@@ -609,7 +629,7 @@
                                 <label style="margin-left: 10px"> Numero </label>
                             </div>
                             <div class="col-lg-6">
-                                <input class="form-control" type="number">
+                                <input [(ngModel)]="detailaction.numero" class="form-control" type="number">
                             </div>
                         </div>
                         <br>
@@ -618,11 +638,11 @@
                                 <label style="margin-left: 10px"> Type </label>
                             </div>
                             <div class="col-lg-6">
-                                <select class="custom-select">
+                                <select [(ngModel)]="detailaction.type" class="custom-select">
                                     <option selected></option>
-                                    <option value="1">AMELIORATION</option>
-                                    <option value="2">AMELIORATION</option>
-                                    <option value="3">AMELIORATION</option>
+                                    <option value="AMELIORATION">AMELIORATION</option>
+                                    <option value="AMELIORATION">AMELIORATION</option>
+                                    <option value="AMELIORATION">AMELIORATION</option>
                                 </select>
                             </div>
                         </div>
@@ -632,7 +652,7 @@
                                 <label style="margin-left: 10px"> Action </label>
                             </div>
                             <div class="col-lg-6">
-                                <textarea rows="3" style="width: 230px"></textarea>
+                                <textarea [(ngModel)]="detailaction.actiontxt"  rows="3" style="width: 230px"></textarea>
                             </div>
                         </div>
                         <br>
@@ -641,7 +661,7 @@
                                 <label style="margin-left: 10px"> Observation </label>
                             </div>
                             <div class="col-lg-6">
-                                <textarea rows="3" style="width: 230px"></textarea>
+                                <textarea [(ngModel)]="detailaction.observation" rows="3" style="width: 230px"></textarea>
                             </div>
                         </div>
                         <br>
@@ -650,10 +670,10 @@
                                 <div class="input-group-prepend">
                                     <label class="input-group-text" style="margin-left: 10px"> Resp.
                                         Réalisation </label>
-                                    <select class="custom-select" style="margin-left: 35px; width: 230px ">
+                                    <select [(ngModel)]="detailaction.resp_realisation" class="custom-select" style="margin-left: 35px; width: 230px ">
                                         <option selected></option>
-                                        <option value="1">user1</option>
-                                        <option value="2">user2</option>
+                                        <option value="user1">user1</option>
+                                        <option value="user2">user2</option>
                                     </select>
                                 </div>
                             </div>
@@ -664,28 +684,28 @@
                                 <label style="margin-left: 10px"> Date debut réelle </label>
                             </div>
                             <div class="col-lg-3">
-                                <input class="form-control" type="date">
+                                <input [(ngModel)]="detailaction.date_debut_reel" class="form-control" type="date">
                             </div>
                             <div class="col-lg-3">
-                                <label style="margin-left: 10px"> Date Prev Début</label>
+                                <label style="margin-left: 10px"> Date Début Prev</label>
                             </div>
                             <div class="col-lg-3">
-                                <input class="form-control" type="date">
+                                <input [(ngModel)]="detailaction.date_debut_prevu" class="form-control" type="date">
                             </div>
                         </div>
                         <br>
                         <div class="row">
                             <div class="col-lg-3">
-                                <label style="margin-left: 10px"> Date fin Réalisée</label>
+                                <label style="margin-left: 10px"> Date fin Réelle</label>
                             </div>
                             <div class="col-lg-3">
-                                <input class="form-control" type="date">
+                                <input [(ngModel)]="detailaction.date_fin_reel" class="form-control" type="date">
                             </div>
                             <div class="col-lg-3">
-                                <label style="margin-left: 10px"> Date Prev Fin</label>
+                                <label style="margin-left: 10px"> Date Fin Prev</label>
                             </div>
                             <div class="col-lg-3">
-                                <input class="form-control" type="date">
+                                <input [(ngModel)]="detailaction.date_fin_prevu" class="form-control" type="date">
                             </div>
                         </div>
                         <br>
@@ -694,7 +714,7 @@
                                 <label style="margin-left: 10px"> Réalisation </label>
                             </div>
                             <div class="col-lg-3">
-                                <textarea rows="3" style="width: 230px"></textarea>
+                                <textarea [(ngModel)]="detailaction.realisationtxt" rows="3" style="width: 230px"></textarea>
                             </div>
                         </div>
                         <br>
@@ -703,7 +723,7 @@
                                 <label style="margin-left: 10px"> Observation Réalisation </label>
                             </div>
                             <div class="col-lg-3">
-                                <textarea rows="3" style="width: 230px"></textarea>
+                                <textarea [(ngModel)]="detailaction.obser_realisation" rows="3" style="width: 230px"></textarea>
                             </div>
                         </div>
                         <br>
@@ -720,17 +740,17 @@
                                     Suivi </label>
                             </div>
                             <div class="col-lg-3">
-                                <select class="custom-select" id="inputGroupSelect07" style="width: 100px">
+                                <select [(ngModel)]="detailaction.resp_suivi" class="custom-select" id="inputGroupSelect07" style="width: 100px">
                                     <option selected></option>
-                                    <option value="1">user1</option>
-                                    <option value="2">user2</option>
+                                    <option value="user1">user1</option>
+                                    <option value="user2">user2</option>
                                 </select>
                             </div>
                             <div class="col-lg-3">
                                 <label style="margin-left: 10px"> Date de Suivi </label>
                             </div>
                             <div class="col-lg-3">
-                                <input class="form-control" type="date">
+                                <input [(ngModel)]="detailaction.date_suivi" class="form-control" type="date">
                             </div>
                         </div>
                         <br>
@@ -739,17 +759,17 @@
                                 <label style="margin-left: 10px"> Taux de Réalisation </label>
                             </div>
                             <div class="col-lg-3">
-                                <input class="form-control" type="number">
+                                <input [(ngModel)]="detailaction.taux_realisation" class="form-control" type="number">
                             </div>
                             <div class="col-lg-3">
                                 <label class="input-group-text" style="margin-left: 10px"> Etat
                                     Action </label>
                             </div>
                             <div class="col-lg-3">
-                                <select class="custom-select" style="width: 100px">
+                                <select [(ngModel)]="detailaction.etat_action" class="custom-select" style="width: 100px">
                                     <option selected></option>
-                                    <option value="1"> Réalisée</option>
-                                    <option value="2"> Non Réalisée</option>
+                                    <option value="Réalisée"> Réalisée</option>
+                                    <option value="Non Réalisée"> Non Réalisée</option>
                                 </select>
                             </div>
                         </div>
@@ -759,7 +779,7 @@
                                 <label style="margin-left: 10px"> Observation Suivi </label>
                             </div>
                             <div class="col-lg-3">
-                                <textarea rows="3" style="width: 230px"></textarea>
+                                <textarea [(ngModel)]="detailaction.obser_suivi" rows="3" style="width: 230px"></textarea>
                             </div>
                         </div>
                     </ng-template>
@@ -775,17 +795,17 @@
                                     Eff </label>
                             </div>
                             <div class="col-lg-3">
-                                <select class="custom-select" id="inputGroupSelect09" style="width: 100px">
+                                <select [(ngModel)]="detailaction.resp_mesure_efficacite" class="custom-select" id="inputGroupSelect09" style="width: 100px">
                                     <option selected></option>
-                                    <option value="1">user1</option>
-                                    <option value="2">user2</option>
+                                    <option value="user1">user1</option>
+                                    <option value="user2">user2</option>
                                 </select>
                             </div>
                             <div class="col-lg-3">
                                 <label style="margin-left: 10px"> Date Mesure Eff </label>
                             </div>
                             <div class="col-lg-3">
-                                <input class="form-control" type="date">
+                                <input [(ngModel)]="detailaction.date_mesure" class="form-control" type="date">
                             </div>
                         </div>
                         <br>
@@ -794,17 +814,17 @@
                                 <label style="margin-left: 10px"> Taux d'efficacité </label>
                             </div>
                             <div class="col-lg-3">
-                                <input class="form-control" type="number">
+                                <input [(ngModel)]="detailaction.taux_efficacite" class="form-control" type="number">
                             </div>
                             <div class="col-lg-3">
                                 <label class="input-group-text" style="margin-left: 10px"> Etat
                                     Efficacite </label>
                             </div>
                             <div class="col-lg-3">
-                                <select class="custom-select" style="width: 100px">
+                                <select [(ngModel)]="detailaction.etat_efficacite" class="custom-select" style="width: 100px">
                                     <option selected></option>
-                                    <option value="1"> Efficace</option>
-                                    <option value="2"> Non Efficace</option>
+                                    <option value="Efficace"> Efficace</option>
+                                    <option value="Non Efficace"> Non Efficace</option>
                                 </select>
                             </div>
                         </div>
@@ -814,7 +834,7 @@
                                 <label style="margin-left: 10px"> Obs. Efficacité </label>
                             </div>
                             <div class="col-lg-3">
-                                <textarea rows="3" style="width: 230px"></textarea>
+                                <textarea [(ngModel)]="detailaction.obser_efficacite"  rows="3" style="width: 230px"></textarea>
                             </div>
                         </div>
                     </ng-template>
@@ -829,13 +849,13 @@
                                 <label style="margin-left:10px;margin-top: 10px"> Cout MO Prévisionnel </label>
                             </div>
                             <div class="col-lg-3">
-                                <input class="form-control" type="number">
+                                <input [(ngModel)]="detailaction.cout_MO_Previs" class="form-control" type="number">
                             </div>
                             <div class="col-lg-3">
                                 <label style="margin-left: 10px;margin-top: 10px"> Cout MO Réel</label>
                             </div>
                             <div class="col-lg-3">
-                                <input class="form-control" type="number">
+                                <input [(ngModel)]="detailaction.cout_MO_Reel" class="form-control" type="number">
                             </div>
                         </div>
                         <br>
@@ -844,13 +864,13 @@
                                 <label style="margin-left: 10px;margin-top: 10px"> Cout Materiel Prévisionnel </label>
                             </div>
                             <div class="col-lg-3">
-                                <input class="form-control" type="number">
+                                <input [(ngModel)]="detailaction.cout_Materiel_Previs" class="form-control" type="number">
                             </div>
                             <div class="col-lg-3">
                                 <label style="margin-left: 10px;margin-top: 10px"> Cout Materiel Réel</label>
                             </div>
                             <div class="col-lg-3">
-                                <input class="form-control" type="number">
+                                <input [(ngModel)]="detailaction.cout_Materiel_Reel" class="form-control" type="number">
                             </div>
                         </div>
                         <br>
@@ -859,13 +879,13 @@
                                 <label style="margin-left: 10px;margin-top: 10px"> Total MO Prévisionnel </label>
                             </div>
                             <div class="col-lg-3">
-                                <input class="form-control" type="number">
+                                <input [value]="detailaction.cout_MO_Reel+detailaction.cout_MO_Previs" class="form-control" type="number">
                             </div>
                             <div class="col-lg-3">
                                 <label style="margin-left: 10px;margin-top: 10px"> Total MO Réel</label>
                             </div>
                             <div class="col-lg-3">
-                                <input class="form-control" type="number">
+                                <input [value]="detailaction.cout_Materiel_Reel+detailaction.cout_Materiel_Previs" class="form-control" type="number">
                             </div>
                         </div>
                     </ng-template>
@@ -874,8 +894,8 @@
 
         </div>
         <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" (click)="modal.close('Save click')">Close</button>
-            <button type="button" class="btn btn-primary">Save</button>
+            <button type="button" class="btn btn-secondary" (click)="modal.close('Save click')">Fermer</button>
+            <button type="button" class="btn btn-primary" (click)="addDetailAction()">Enregistrer</button>
         </div>
     </ng-template>
 

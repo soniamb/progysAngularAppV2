@@ -20,4 +20,12 @@ export class ActionApiService {
     updateAction(data){
         return this.http.post(this.baseUrl+'updateAction',data);
     }
+
+    addDetailAction(data){
+        return this.http.post(this.baseUrl+'addDetailAction',data);
+    }
+
+    getDetailActionList(id_action) {
+        return this.http.get(this.baseUrl + 'detailActionList/'+id_action);
+    }
 }

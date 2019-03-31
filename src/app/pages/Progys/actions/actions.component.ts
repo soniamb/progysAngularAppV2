@@ -14,6 +14,7 @@ export class ActionsComponent {
 
     actions = [];
     actionsCopy =[];
+    detailsAction =[];
     add_action=false;
     update =false;
 
@@ -47,6 +48,37 @@ export class ActionsComponent {
         date_cloture:'',
         observation_cloture:''
     };
+
+    detailaction = {
+        id_action:'',
+        numero:'',
+        type:'',
+        actiontxt:'',
+        observation:'',
+        resp_realisation:'',
+        date_debut_reel:'',
+        date_debut_prevu:'',
+        date_fin_reel:'',
+        date_fin_prevu:'',
+        realisationtxt:'',
+        obser_realisation:'',
+        resp_suivi:'',
+        date_suivi:'',
+        taux_realisation:'',
+        etat_action:'',
+        obser_suivi:'',
+        resp_mesure_efficacite:'',
+        date_mesure:'',
+        taux_efficacite:'',
+        etat_efficacite:'',
+        obser_efficacite:'',
+        cout_MO_Previs:'',
+        cout_MO_Reel:'',
+        cout_Materiel_Previs:'',
+        cout_Materiel_Reel:''
+
+    };
+
     closeResult: string;
 
   constructor(protected dateService: NbDateService<Date>,private actionservice: ActionApiService,
@@ -118,10 +150,18 @@ export class ActionsComponent {
     }
 
     toUpdate(action){
-
-      this.action = action;
-      this.add_action = true;
-      this.update = true;
+        this.action = action;
+        this.detailaction.id_action = action.id;
+        this.add_action = true;
+        this.update = true;
+        this.spinner.show();
+      this.actionservice.getDetailActionList(action.id).subscribe(rep => {
+          console.log(rep);
+          this.detailsAction = rep['data'];
+          this.spinner.hide();
+      },error => {
+          console.log(error);
+      });
 
       //console.log(action);
     }
@@ -144,6 +184,25 @@ export class ActionsComponent {
          },error => {
              console.log(error);
          })
+    }
+
+
+    addDetailAction(){
+        this.spinner.show();
+      this.actionservice.addDetailAction(this.detailaction).subscribe(res => {
+          console.log(res);
+          this.actionservice.getDetailActionList(this.detailaction.id_action).subscribe(r => {
+              this.detailsAction = r['data'];
+              this.spinner.hide();
+          },error => {
+              console.log(error);
+              this.spinner.hide();
+          });
+      },error => {
+          console.log(error);
+          this.spinner.hide();
+      })
+
     }
 
 }
