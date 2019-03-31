@@ -16,4 +16,8 @@ export class ActionApiService {
     addAction(data){
         return this.http.post(this.baseUrl+'addAction',data);
     }
+
+    updateAction(data){
+        return this.http.post(this.baseUrl+'updateAction',data);
+    }
 }

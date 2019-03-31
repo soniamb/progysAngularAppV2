@@ -117,4 +117,33 @@ export class ActionsComponent {
       this.actions = this.actionsCopy;
     }
 
+    toUpdate(action){
+
+      this.action = action;
+      this.add_action = true;
+      this.update = true;
+
+      //console.log(action);
+    }
+
+    updateAction(){
+        this.spinner.show();
+         this.actionservice.updateAction(this.action).subscribe(rep => {
+
+             this.actionservice.getActions().subscribe(res => {
+
+                 this.actions = res['data'];
+                 this.actionsCopy = res['data'];
+                 this.update = false;
+                 this.add_action = false;
+                 this.spinner.hide();
+
+             }, error => {
+                 console.log(error);
+             });
+         },error => {
+             console.log(error);
+         })
+    }
+
 }

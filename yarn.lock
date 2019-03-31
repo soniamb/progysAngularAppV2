@@ -5694,6 +5694,10 @@ neo-async@^2.5.0, neo-async@^2.6.0:
   version "2.6.0"
   resolved "https://registry.yarnpkg.com/neo-async/-/neo-async-2.6.0.tgz#b9d15e4d71c6762908654b5183ed38b753340835"
 
+ng-circle-progress@^1.4.0:
+  version "1.4.0"
+  resolved "https://registry.yarnpkg.com/ng-circle-progress/-/ng-circle-progress-1.4.0.tgz#e59f441b7099aef29a54e3ea4e94067b1cd9f9f6"
+
 ng2-ckeditor@^1.2.2:
   version "1.2.2"
   resolved "https://registry.yarnpkg.com/ng2-ckeditor/-/ng2-ckeditor-1.2.2.tgz#b2f55c3e929a72c15336106950df0bf5ad31b806"

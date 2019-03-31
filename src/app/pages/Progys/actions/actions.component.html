@@ -145,7 +145,7 @@
                             </tr>
                             </thead>
                             <tbody>
-                            <tr *ngFor="let action of actions">
+                            <tr *ngFor="let action of actions;let i=index;" (dblclick)="toUpdate(action)" style="cursor: pointer">
                                 <td>
                                     <small></small>
                                     {{action.id}}
@@ -185,7 +185,8 @@
                                 </button>
                                 <ul class="dropdown-menu" ngbDropdownMenu>
                                     <li class="dropdown-item" (click)="showHideAddAction()">Retour</li>
-                                    <li class="dropdown-item" (click)="addAction()">Enregistrer</li>
+                                    <li *ngIf="update==false" class="dropdown-item" (click)="addAction()">Enregistrer</li>
+                                    <li *ngIf="update==true" class="dropdown-item" (click)="updateAction()">Modifier</li>
                                 </ul>
                             </div>
                         </div>
@@ -214,6 +215,34 @@
                                     <option value="AUTRE">AUTRE</option>
                                 </select>
                             </div>
+                        </div>
+                        <div class="col-lg-2" *ngIf="update ==true" style="margin-left:150px">
+                            <circle-progress
+                                    [percent]="action.taux_efficacite"
+                                    [radius]="70"
+                                    [outerStrokeWidth]="5"
+                                    [innerStrokeWidth]="2"
+                                    [outerStrokeColor]="'#78C000'"
+                                    [innerStrokeColor]="'#C7E596'"
+                                    [animation]="true"
+                                    [animationDuration]="800"
+                                    subtitle="Efficacité"
+                            ></circle-progress>
+
+                        </div>
+                        <div class="col-lg-3" *ngIf="update == true">
+                            <circle-progress
+                                    [percent]="action.taux_realisation"
+                                    [radius]="70"
+                                    [outerStrokeWidth]="5"
+                                    [innerStrokeWidth]="2"
+                                    [outerStrokeColor]="'#78C000'"
+                                    [innerStrokeColor]="'#C7E596'"
+                                    [animation]="true"
+                                    [animationDuration]="800"
+                                    subtitle="Réalisation"
+                            ></circle-progress>
+
                         </div>
                     </div>
                     <br>

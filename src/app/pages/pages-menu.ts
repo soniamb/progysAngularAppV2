@@ -227,7 +227,7 @@ export const MENU_ITEMS: NbMenuItem[] = [
         link: '/pages/editors/ckeditor',
       },
     ],
-  },
+  },*/
   {
     title: 'Tables',
     icon: 'nb-tables',
@@ -269,5 +269,5 @@ export const MENU_ITEMS: NbMenuItem[] = [
         link: '/auth/reset-password',
       },
     ],
-  },*/
+  },
 ];

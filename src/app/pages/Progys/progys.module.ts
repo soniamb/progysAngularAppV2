@@ -13,6 +13,7 @@ import { ProgysComponent } from './progys.component';
 import { NewsService } from './services/news.service';
 import {ActionsComponent} from "./actions/actions.component";
 import {NgxSpinnerModule} from "ngx-spinner";
+import {NgCircleProgressModule} from "ng-circle-progress";
 
 const COMPONENTS = [
     ProgysComponent,
@@ -28,7 +29,15 @@ const MODULES = [
   ProgysRoutingModule,
   TreeModule,
   ToasterModule.forRoot(),
-    NgxSpinnerModule
+    NgxSpinnerModule,
+    NgCircleProgressModule.forRoot({
+        radius: 100,
+        outerStrokeWidth: 16,
+        innerStrokeWidth: 8,
+        outerStrokeColor: "#78C000",
+        innerStrokeColor: "#C7E596",
+        animationDuration: 300
+    })
 ];
 
 @NgModule({
