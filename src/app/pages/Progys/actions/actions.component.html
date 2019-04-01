@@ -287,7 +287,7 @@
                         </div>
                         <div class="col-lg-3">
                             <div class="input-group">
-              <textarea [(ngModel)]="action.desc_prob" rows="5" placeholder="Text Area"
+              <textarea [(ngModel)]="action.desc_prob" rows="5" placeholder=""
                         class="form-control"></textarea>
                             </div>
                         </div>
@@ -317,7 +317,7 @@
                         </div>
                         <div class="col-lg-3">
                             <div class="input-group">
-                     <textarea [(ngModel)]="action.analy_causes" rows="5" placeholder="Text Area"
+                     <textarea [(ngModel)]="action.analy_causes" rows="5" placeholder=""
                                class="form-control">
                      </textarea>
                             </div>
@@ -514,45 +514,53 @@
 
 
     <!--Document-joint -->
-    <div class="row">
+    <div class="row" *ngIf="update == true">
         <div class="col-md-12">
             <nb-card class="inline-form-card">
-                <nb-card-header> Document joint</nb-card-header>
-                <nb-card-body>
-                    <div class="dropdown ghost-dropdown" style="margin-left:78%" ngbDropdown>
-                        <button type="button" class="btn btn-outline-primary" ngbDropdownToggle> Document joint
-                        </button>
-                        <ul class="dropdown-menu" ngbDropdownMenu>
-                            <li class="dropdown-item">
-                                <button class="btn btn-outline btn-primary" data-toggle="modal"
-                                        data-target="#exampleModal" data-whatever="@mdo"
-                                        style="margin-left: 12px; margin-top: 5px">Ajouter
+                <nb-card-header>
+                    <div class="row">
+                        <div class="col-9">
+                            Documents Joint
+                        </div>
+                        <div class="col-2">
+                            <div class="dropdown ghost-dropdown" ngbDropdown>
+                                <button type="button" class="btn btn-outline-primary" ngbDropdownToggle> actions
                                 </button>
-                            </li>
-                            <li class="dropdown-item">
-                                <button class="btn btn-outline btn-primary" data-toggle="modal"
-                                        data-target="#exampleModal" data-whatever="@mdo"
-                                        style="margin-left: 12px; margin-top: 5px"> Modifier
-                                </button>
-                            </li>
-                            <li class="dropdown-item">
-                                <button class="btn btn-outline btn-primary" style="margin-left: 12px; margin-top: 5px">
-                                    Supprimer
-                                </button>
-                            </li>
-                            <li class="divider"></li>
-                        </ul>
+                                <input #fileUpload type="file" name="doc_action" (click)="fileUpload.value = null" (change)="addDocument($event)"
+                                       style="display:none">
+                                <ul class="dropdown-menu" ngbDropdownMenu>
+                                    <li class="dropdown-item" (click)="fileUpload.click()">Ajouter</li>
+                                </ul>
+                            </div>
+                        </div>
                     </div>
+                </nb-card-header>
+                <nb-card-body>
                     <br>
                     <div class="ibox-content" style="margin-bottom:50px">
                         <table class="table table-hover no-margins">
                             <thead>
                             <tr>
-                                <th> Nom Document</th>
-                                <th> Type</th>
+                                <th>Id</th>
+                                <th>Nom</th>
+                                <th>Type</th>
+                                <th>Date de création</th>
+                                <th>actions</th>
                             </tr>
                             </thead>
                             <tbody>
+                            <tr *ngFor="let doc of docList;let i=index;">
+                                <td>
+                                    <small></small>
+                                    {{doc.id}}
+                                </td>
+                                <td>{{doc.nom}}</td>
+                                <td>{{doc.type}}</td>
+                                <td>{{doc.date_creation | date:'dd MMM yyyy'}}</td>
+                                <td>
+
+                                </td>
+                            </tr>
                             </tbody>
                         </table>
                     </div>
@@ -560,8 +568,10 @@
             </nb-card>
         </div>
     </div>
+
+
+    <!-- Modal document-joint -->
     <div class="row">
-        <!-- Modal document-joint -->
         <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
              aria-hidden="true">
             <div class="modal-dialog" role="document">

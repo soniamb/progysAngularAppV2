@@ -15,6 +15,7 @@ export class ActionsComponent {
     actions = [];
     actionsCopy =[];
     detailsAction =[];
+    docList = [];
     add_action=false;
     update =false;
 
@@ -105,6 +106,26 @@ export class ActionsComponent {
     }
 
     showHideAddAction(){
+
+      this.action = {
+          code:'',
+          type:'',
+          priorite:'',
+          demandeur:'',
+          prov_de:'',
+          analy_causes:'',
+          categorie:'',
+          desc_prob:'',
+          code_origine:'',
+          taux_realisation:'',
+          taux_efficacite:'',
+          observation:'',
+          etat:'',
+          date_cloture:'',
+          observation_cloture:''
+      };
+
+      this.update =false ;
       this.add_action = !this.add_action;
     }
 
@@ -130,11 +151,6 @@ export class ActionsComponent {
     }
 
     searchActions(){
-
-        /*console.log(Date.parse(moment(this.actions[0].date_creation).format('YYYY-MM-DD')));
-        console.log(Date.parse(this.search.dateDe));
-        console.log(Date.parse(moment(this.actions[0].date_creation).format('DD MM YYYY')));*/
-
         this.actions = this.actions.filter( x => (this.search.code =='' || x.code == this.search.code) &&
                                           ( this.search.type =='' || x.type == this.search.type) &&
                                           ( this.search.categorie =='' || x.categorie == this.search.categorie) &&
@@ -151,19 +167,26 @@ export class ActionsComponent {
 
     toUpdate(action){
         this.action = action;
+        this.action.date_cloture = moment(this.action.date_cloture).format('YYYY-MM-DD');
         this.detailaction.id_action = action.id;
         this.add_action = true;
         this.update = true;
         this.spinner.show();
+
       this.actionservice.getDetailActionList(action.id).subscribe(rep => {
-          console.log(rep);
           this.detailsAction = rep['data'];
-          this.spinner.hide();
+          this.actionservice.getDocList(action.id).subscribe( r => {
+              this.docList = r['data'];
+              console.log('*****DOCS******');
+              console.log(r);
+              this.spinner.hide();
+          },error => {
+              console.log(error);
+          });
       },error => {
           console.log(error);
       });
 
-      //console.log(action);
     }
 
     updateAction(){
@@ -188,9 +211,9 @@ export class ActionsComponent {
 
 
     addDetailAction(){
-        this.spinner.show();
+      this.spinner.show();
       this.actionservice.addDetailAction(this.detailaction).subscribe(res => {
-          console.log(res);
+
           this.actionservice.getDetailActionList(this.detailaction.id_action).subscribe(r => {
               this.detailsAction = r['data'];
               this.spinner.hide();
@@ -202,6 +225,29 @@ export class ActionsComponent {
           console.log(error);
           this.spinner.hide();
       })
+
+    }
+
+    addDocument(event){
+
+        this.spinner.show();
+        if (event.target.files.length == 0) {
+            console.log("No file selected!");
+            return
+        }
+        let file = event.target.files[0];
+        this.actionservice.uploadDoc({doc_action:file,id_action:this.detailaction.id_action}).subscribe(rep => {
+            console.log(rep);
+            this.actionservice.getDocList(this.detailaction.id_action).subscribe( r => {
+                console.log(r);
+                this.docList = r['data'];
+                this.spinner.hide();
+            },error => {
+                console.log(error);
+            });
+        },error => {
+            console.log(error);
+        })
 
     }
 
