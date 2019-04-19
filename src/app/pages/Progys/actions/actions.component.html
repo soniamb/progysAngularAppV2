@@ -4,6 +4,7 @@
         color="#fff"
         type="ball-scale-multiple">
     <p style="font-size: 20px; color: white">Loading...</p>
+    <p style="font-size: 25px; color: white;font-weight: bold">{{uploadPercent}}</p>
 </ngx-spinner>
 
 
@@ -93,17 +94,21 @@
                             <label> ETAT ACTION</label>
                         </div>
                         <div class="col-lg-3">
-                            <input [(ngModel)]="search.etat" type="radio" name="r1" value="Ouverte"> <label>OUVERTE</label>
+                            <input [(ngModel)]="search.etat" type="radio" name="r1" value="Ouverte">
+                            <label>OUVERTE</label>
                             &nbsp;
-                            <input [(ngModel)]="search.etat" type="radio" name="r2" value="Cloturer"> <label>CLOTUREE</label>
+                            <input [(ngModel)]="search.etat" type="radio" name="r2" value="Cloturer">
+                            <label>CLOTUREE</label>
                         </div>
                         <div class="col-lg-2">
-                            <button (click)="annulerSearch()" type="button" class="btn btn-outline-primary" style="margin-left: 80%">
+                            <button (click)="annulerSearch()" type="button" class="btn btn-outline-primary"
+                                    style="margin-left: 80%">
                                 Annuler
                             </button>
                         </div>
                         <div class="col-lg-2">
-                            <button (click)="searchActions()" type="button" class="btn btn-outline-primary" style="margin-left: 80%">
+                            <button (click)="searchActions()" type="button" class="btn btn-outline-primary"
+                                    style="margin-left: 80%">
                                 Chercher
                             </button>
                         </div>
@@ -122,12 +127,7 @@
                         </button>
                         <ul class="dropdown-menu" ngbDropdownMenu>
                             <li class="dropdown-item" (click)="showHideAddAction()"> Ajouter</li>
-                        </ul>
-                        <ul class="dropdown-menu" ngbDropdownMenu>
-                            <li class="dropdown-item" (click)="showHideAddAction()"> Modifier</li>
-                        </ul>
-                        <ul class="dropdown-menu" ngbDropdownMenu>
-                            <li class="dropdown-item"> Supprimer</li>
+                            <li [hidden]="actionsTodeleted.length === 0" class="dropdown-item" (click)="deleteActions()"> Supprimer</li>
                         </ul>
                     </div>
                     <div class="ibox-content" style="margin-bottom:15px; margin-top: 10px">
@@ -145,10 +145,14 @@
                             </tr>
                             </thead>
                             <tbody>
-                            <tr *ngFor="let action of actions;let i=index;" (dblclick)="toUpdate(action)" style="cursor: pointer">
+                            <tr *ngFor="let action of actions;let i=index;" (dblclick)="toUpdate(action)"
+                                style="cursor: pointer">
                                 <td>
-                                    <small></small>
-                                    {{action.id}}
+                                    <div class="custom-control custom-checkbox">
+                                        <input (change)="addActionToDelete(action.id)" type="checkbox"
+                                               class="custom-control-input" [id]="'customCheck'+i">
+                                        <label class="custom-control-label" [for]="'customCheck'+i">{{i + 1}}</label>
+                                    </div>
                                 </td>
                                 <td>{{action.code_origine}}</td>
                                 <td>{{action.categorie}}</td>
@@ -185,8 +189,10 @@
                                 </button>
                                 <ul class="dropdown-menu" ngbDropdownMenu>
                                     <li class="dropdown-item" (click)="showHideAddAction()">Retour</li>
-                                    <li *ngIf="update==false" class="dropdown-item" (click)="addAction()">Enregistrer</li>
-                                    <li *ngIf="update==true" class="dropdown-item" (click)="updateAction()">Modifier</li>
+                                    <li *ngIf="update==false" class="dropdown-item" (click)="addAction()">Enregistrer
+                                    </li>
+                                    <li *ngIf="update==true" class="dropdown-item" (click)="updateAction()">Modifier
+                                    </li>
                                 </ul>
                             </div>
                         </div>
@@ -381,11 +387,9 @@
                                 <li class="dropdown-item" (click)="open(content)">
                                     Ajouter
                                 </li>
-                                <!--<li class="dropdown-item" data-toggle="modal" data-target="#exampleModalCenter">
-                                  Modifier
-                                </li>-->
-                                <li class="dropdown-item">
+                                <li [hidden]="detailActionToDeleted.length === 0" class="dropdown-item" (click)="deletedetailsAction()">
                                     Supprimer
+                                </li>
                             </ul>
                         </div>
                         <div class="ibox-content" style="margin-bottom:15px; margin-top: 10px">
@@ -403,10 +407,13 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-                                <tr *ngFor="let dc of detailsAction;let i=index;">
+                                <tr *ngFor="let dc of detailsAction;let i=index;" (dblclick)="openDetailActForUpdate(content,dc)">
                                     <td>
-                                        <small></small>
-                                        {{dc.id}}
+                                        <div class="custom-control custom-checkbox">
+                                            <input (change)="addDetailActionToDelete(dc.id)" type="checkbox"
+                                                   class="custom-control-input" [id]="'customCheck'+i">
+                                            <label class="custom-control-label" [for]="'customCheck'+i">{{i + 1}}</label>
+                                        </div>
                                     </td>
                                     <td>{{dc.numero}}</td>
                                     <td>{{dc.observation}}</td>
@@ -526,11 +533,18 @@
                             <div class="dropdown ghost-dropdown" ngbDropdown>
                                 <button type="button" class="btn btn-outline-primary" ngbDropdownToggle> actions
                                 </button>
-                                <input #fileUpload type="file" name="doc_action" (click)="fileUpload.value = null" (change)="addDocument($event)"
+                                <input #fileUpload type="file" name="doc_action" (click)="fileUpload.value = null"
+                                       (change)="addDocument($event)"
                                        style="display:none">
                                 <ul class="dropdown-menu" ngbDropdownMenu>
                                     <li class="dropdown-item" (click)="fileUpload.click()">Ajouter</li>
+                                    <li [hidden]="docToDeleted.length === 0"  class="dropdown-item"
+                                         (click)="deleteDocs()">Supprimer
+                                    </li>
                                 </ul>
+
+
+
                             </div>
                         </div>
                     </div>
@@ -551,10 +565,13 @@
                             <tbody>
                             <tr *ngFor="let doc of docList;let i=index;">
                                 <td>
-                                    <small></small>
-                                    {{doc.id}}
+                                    <div class="custom-control custom-checkbox">
+                                        <input (change)="addDocTodelete(doc.id)" type="checkbox"
+                                               class="custom-control-input" [id]="'customCheck'+i">
+                                        <label class="custom-control-label" [for]="'customCheck'+i">{{i + 1}}</label>
+                                    </div>
                                 </td>
-                                <td>{{doc.nom}}</td>
+                                <td><a [href]="doc.path" target="_blank">{{doc.nom}}</a></td>
                                 <td>{{doc.type}}</td>
                                 <td>{{doc.date_creation | date:'dd MMM yyyy'}}</td>
                                 <td>
@@ -618,7 +635,6 @@
     </div>
 
 
-
     <!-- Modal detail-action -->
     <ng-template #content let-modal>
         <div class="modal-header">
@@ -662,7 +678,7 @@
                                 <label style="margin-left: 10px"> Action </label>
                             </div>
                             <div class="col-lg-6">
-                                <textarea [(ngModel)]="detailaction.actiontxt"  rows="3" style="width: 230px"></textarea>
+                                <textarea [(ngModel)]="detailaction.actiontxt" rows="3" style="width: 230px"></textarea>
                             </div>
                         </div>
                         <br>
@@ -671,16 +687,17 @@
                                 <label style="margin-left: 10px"> Observation </label>
                             </div>
                             <div class="col-lg-6">
-                                <textarea [(ngModel)]="detailaction.observation" rows="3" style="width: 230px"></textarea>
+                                <textarea [(ngModel)]="detailaction.observation" rows="3"
+                                          style="width: 230px"></textarea>
                             </div>
                         </div>
                         <br>
                         <div class="row">
                             <div class="input-group mb-3">
                                 <div class="input-group-prepend">
-                                    <label class="input-group-text" style="margin-left: 10px"> Resp.
-                                        Réalisation </label>
-                                    <select [(ngModel)]="detailaction.resp_realisation" class="custom-select" style="margin-left: 35px; width: 230px ">
+                                    <label class="input-group-text" style="margin-left: 10px"> Resp. Réalisation </label>
+                                    <select [(ngModel)]="detailaction.resp_realisation" class="custom-select"
+                                            style="margin-left: 35px; width: 230px ">
                                         <option selected></option>
                                         <option value="user1">user1</option>
                                         <option value="user2">user2</option>
@@ -724,7 +741,8 @@
                                 <label style="margin-left: 10px"> Réalisation </label>
                             </div>
                             <div class="col-lg-3">
-                                <textarea [(ngModel)]="detailaction.realisationtxt" rows="3" style="width: 230px"></textarea>
+                                <textarea [(ngModel)]="detailaction.realisationtxt" rows="3"
+                                          style="width: 230px"></textarea>
                             </div>
                         </div>
                         <br>
@@ -733,7 +751,8 @@
                                 <label style="margin-left: 10px"> Observation Réalisation </label>
                             </div>
                             <div class="col-lg-3">
-                                <textarea [(ngModel)]="detailaction.obser_realisation" rows="3" style="width: 230px"></textarea>
+                                <textarea [(ngModel)]="detailaction.obser_realisation" rows="3"
+                                          style="width: 230px"></textarea>
                             </div>
                         </div>
                         <br>
@@ -750,7 +769,8 @@
                                     Suivi </label>
                             </div>
                             <div class="col-lg-3">
-                                <select [(ngModel)]="detailaction.resp_suivi" class="custom-select" id="inputGroupSelect07" style="width: 100px">
+                                <select [(ngModel)]="detailaction.resp_suivi" class="custom-select"
+                                        id="inputGroupSelect07" style="width: 100px">
                                     <option selected></option>
                                     <option value="user1">user1</option>
                                     <option value="user2">user2</option>
@@ -776,7 +796,8 @@
                                     Action </label>
                             </div>
                             <div class="col-lg-3">
-                                <select [(ngModel)]="detailaction.etat_action" class="custom-select" style="width: 100px">
+                                <select [(ngModel)]="detailaction.etat_action" class="custom-select"
+                                        style="width: 100px">
                                     <option selected></option>
                                     <option value="Réalisée"> Réalisée</option>
                                     <option value="Non Réalisée"> Non Réalisée</option>
@@ -789,7 +810,8 @@
                                 <label style="margin-left: 10px"> Observation Suivi </label>
                             </div>
                             <div class="col-lg-3">
-                                <textarea [(ngModel)]="detailaction.obser_suivi" rows="3" style="width: 230px"></textarea>
+                                <textarea [(ngModel)]="detailaction.obser_suivi" rows="3"
+                                          style="width: 230px"></textarea>
                             </div>
                         </div>
                     </ng-template>
@@ -805,7 +827,8 @@
                                     Eff </label>
                             </div>
                             <div class="col-lg-3">
-                                <select [(ngModel)]="detailaction.resp_mesure_efficacite" class="custom-select" id="inputGroupSelect09" style="width: 100px">
+                                <select [(ngModel)]="detailaction.resp_mesure_efficacite" class="custom-select"
+                                        id="inputGroupSelect09" style="width: 100px">
                                     <option selected></option>
                                     <option value="user1">user1</option>
                                     <option value="user2">user2</option>
@@ -831,7 +854,8 @@
                                     Efficacite </label>
                             </div>
                             <div class="col-lg-3">
-                                <select [(ngModel)]="detailaction.etat_efficacite" class="custom-select" style="width: 100px">
+                                <select [(ngModel)]="detailaction.etat_efficacite" class="custom-select"
+                                        style="width: 100px">
                                     <option selected></option>
                                     <option value="Efficace"> Efficace</option>
                                     <option value="Non Efficace"> Non Efficace</option>
@@ -844,7 +868,8 @@
                                 <label style="margin-left: 10px"> Obs. Efficacité </label>
                             </div>
                             <div class="col-lg-3">
-                                <textarea [(ngModel)]="detailaction.obser_efficacite"  rows="3" style="width: 230px"></textarea>
+                                <textarea [(ngModel)]="detailaction.obser_efficacite" rows="3"
+                                          style="width: 230px"></textarea>
                             </div>
                         </div>
                     </ng-template>
@@ -874,7 +899,8 @@
                                 <label style="margin-left: 10px;margin-top: 10px"> Cout Materiel Prévisionnel </label>
                             </div>
                             <div class="col-lg-3">
-                                <input [(ngModel)]="detailaction.cout_Materiel_Previs" class="form-control" type="number">
+                                <input [(ngModel)]="detailaction.cout_Materiel_Previs" class="form-control"
+                                       type="number">
                             </div>
                             <div class="col-lg-3">
                                 <label style="margin-left: 10px;margin-top: 10px"> Cout Materiel Réel</label>
@@ -889,13 +915,15 @@
                                 <label style="margin-left: 10px;margin-top: 10px"> Total MO Prévisionnel </label>
                             </div>
                             <div class="col-lg-3">
-                                <input [value]="detailaction.cout_MO_Reel+detailaction.cout_MO_Previs" class="form-control" type="number">
+                                <input [value]="detailaction.cout_MO_Reel+detailaction.cout_MO_Previs"
+                                       class="form-control" type="number">
                             </div>
                             <div class="col-lg-3">
                                 <label style="margin-left: 10px;margin-top: 10px"> Total MO Réel</label>
                             </div>
                             <div class="col-lg-3">
-                                <input [value]="detailaction.cout_Materiel_Reel+detailaction.cout_Materiel_Previs" class="form-control" type="number">
+                                <input [value]="detailaction.cout_Materiel_Reel+detailaction.cout_Materiel_Previs"
+                                       class="form-control" type="number">
                             </div>
                         </div>
                     </ng-template>
@@ -905,7 +933,13 @@
         </div>
         <div class="modal-footer">
             <button type="button" class="btn btn-secondary" (click)="modal.close('Save click')">Fermer</button>
-            <button type="button" class="btn btn-primary" (click)="addDetailAction()">Enregistrer</button>
+            <div *ngIf="isUpdateDetailAct === false">
+                <button type="button" class="btn btn-primary" (click)="addDetailAction()">Enregistrer</button>
+            </div>
+            <div *ngIf="isUpdateDetailAct === true">
+                <button type="button" class="btn btn-primary" (click)="updateDetailAction()">Modifier</button>
+            </div>
+
         </div>
     </ng-template>
 

@@ -84,7 +84,7 @@ export const MENU_ITEMS: NbMenuItem[] = [
             },
         ],
     },
-  {
+  /*{
     title: 'Forms',
     icon: 'nb-compose',
     children: [
@@ -105,7 +105,7 @@ export const MENU_ITEMS: NbMenuItem[] = [
         link: '/pages/forms/datepicker',
       },
     ],
-  },
+  },*/
   /*
   {
     title: 'UI Features',
@@ -228,7 +228,7 @@ export const MENU_ITEMS: NbMenuItem[] = [
       },
     ],
   },*/
-  {
+  /*{
     title: 'Tables',
     icon: 'nb-tables',
     children: [
@@ -269,5 +269,5 @@ export const MENU_ITEMS: NbMenuItem[] = [
         link: '/auth/reset-password',
       },
     ],
-  },
+  },*/
 ];
